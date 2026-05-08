@@ -1,0 +1,141 @@
+/* Why IMS Page Styles */
+
+.why-ims-page {
+  background: var(--clr-white);
+}
+
+/* Award Highlight Section */
+.award-showcase {
+  background: var(--clr-navy-dark);
+  color: var(--clr-white);
+  padding: 80px 0;
+  border-radius: var(--radius-lg);
+  margin-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.award-showcase::after {
+  content: '\f091';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  font-size: 15rem;
+  opacity: 0.05;
+  color: var(--clr-gold);
+}
+
+.award-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.award-badge {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--clr-gold);
+  color: var(--clr-white);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  border-radius: 50px;
+  margin-bottom: 25px;
+}
+
+.award-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  color: var(--clr-white);
+  margin-bottom: 20px;
+}
+
+.award-desc {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+/* Pillar Sections */
+.pillar-section {
+  margin-bottom: 100px;
+}
+
+.pillar-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 120px;
+}
+
+.pillar-item:nth-child(even) {
+  direction: rtl;
+}
+
+.pillar-item:nth-child(even) .pillar-text {
+  direction: ltr;
+}
+
+.pillar-image {
+  width: 100%;
+  height: 450px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  box-shadow: var(--shadow-lg);
+}
+
+.pillar-text h3 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  color: var(--clr-navy);
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.pillar-text h3::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--clr-gold);
+  margin-top: 15px;
+}
+
+.pillar-text p {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--clr-muted);
+}
+
+/* Quote/Highlight Box */
+.highlight-box {
+  padding: 40px;
+  background: var(--clr-off-white);
+  border-left: 5px solid var(--clr-gold);
+  margin-top: 30px;
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 992px) {
+  .pillar-item {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+  .pillar-item:nth-child(even) {
+    direction: ltr;
+  }
+  .pillar-image {
+    height: 350px;
+  }
+  .award-title {
+    font-size: 1.8rem;
+  }
+}

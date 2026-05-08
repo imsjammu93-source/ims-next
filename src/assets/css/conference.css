@@ -1,0 +1,92 @@
+/* Conference Page Styles */
+
+.conference-page {
+  background: var(--clr-white);
+}
+
+.conference-intro {
+  margin-bottom: 40px;
+}
+
+.conference-main-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--clr-navy);
+  margin-bottom: 25px;
+  line-height: 1.4;
+  border-left: 5px solid var(--clr-gold);
+  padding-left: 20px;
+}
+
+.conference-report-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--clr-text);
+  margin-bottom: 50px;
+}
+
+/* Large Stacked Images */
+.event-gallery-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.event-image-item {
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.event-image-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: var(--transition);
+}
+
+.event-image-item:hover img {
+  transform: scale(1.02);
+}
+
+.event-image-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(0,0,0,0.05);
+  pointer-events: none;
+}
+
+/* Statistics or Highlights */
+.conf-highlights {
+  margin-top: 60px;
+  padding: 40px;
+  background: var(--clr-off-white);
+  border-radius: var(--radius-lg);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  text-align: center;
+}
+
+.conf-highlight-item h4 {
+  color: var(--clr-gold);
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.conf-highlight-item p {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--clr-navy);
+}
+
+@media (max-width: 768px) {
+  .conf-highlights {
+    grid-template-columns: 1fr;
+  }
+}

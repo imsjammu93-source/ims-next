@@ -1,0 +1,137 @@
+/* Leading Recruiters Page - Redesigned from Scratch */
+
+.recruiters-page {
+  background: var(--clr-white);
+  padding-bottom: 100px;
+}
+
+/* Centered Header Section */
+.recruiters-header-box {
+  padding: 100px 0 60px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.recruiters-header-box .section-title {
+  margin-bottom: 30px;
+  text-align: center; /* Ensure title is centered */
+}
+
+.recruiters-header-box .section-desc {
+  margin: 0 auto;
+  text-align: center; /* Ensure paragraph is centered and aligned with title */
+  line-height: 1.8;
+  font-size: 1.15rem;
+}
+
+/* The Logo Wall - Seamless & Large */
+.recruiter-wall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Big Columns for impact */
+  gap: 2px; /* Minimal gap for a "wall" effect */
+  background: #f0f0f0; /* Color for the thin gaps */
+  border: 2px solid #f0f0f0;
+  margin: 50px 0;
+}
+
+.wall-item {
+  background: var(--clr-white);
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.wall-item img {
+  width: 80%; /* Logo takes up most of the space */
+  height: 80%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.wall-item:hover img {
+  transform: scale(1.1);
+}
+
+.wall-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--clr-navy);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wall-item:hover::after {
+  opacity: 0.03;
+}
+
+/* Big Stats Section */
+.modern-stats-banner {
+  background: var(--clr-navy-dark);
+  padding: 100px 0;
+  color: var(--clr-white);
+  margin: 80px 0;
+}
+
+.modern-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  text-align: center;
+}
+
+.modern-stat-card .stat-number {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--clr-gold);
+  line-height: 1;
+  margin-bottom: 15px;
+  font-family: var(--font-heading);
+}
+
+.modern-stat-card .stat-label {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Bottom CTA */
+.recruitment-cta {
+  padding: 100px 0;
+  background: var(--clr-off-white);
+  text-align: center;
+}
+
+.recruitment-cta h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1024px) {
+  .recruiter-wall {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .modern-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .recruitment-cta h2 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recruiter-wall {
+    grid-template-columns: 1fr;
+  }
+  .modern-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,137 @@
+/* Training & Placement Cell Styles */
+
+.tpc-page {
+  background: var(--clr-white);
+}
+
+/* Centered Message Layout */
+.tpc-message-centered {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tpc-text-block {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--clr-text);
+}
+
+.tpc-text-block p {
+  margin-bottom: 25px;
+}
+
+.tpc-highlight-box {
+  background: var(--clr-off-white);
+  padding: 40px;
+  border-left: 5px solid var(--clr-gold);
+  margin: 40px 0;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--clr-navy);
+  position: relative;
+}
+
+.tpc-highlight-box::before {
+  content: '"';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 5rem;
+  color: var(--clr-gold);
+  opacity: 0.1;
+  font-family: serif;
+}
+
+.tpc-signature {
+  margin-top: 60px;
+  text-align: right;
+}
+
+.signature-line {
+  width: 150px;
+  height: 2px;
+  background: var(--clr-gold);
+  margin-left: auto;
+  margin-bottom: 15px;
+}
+
+.tpc-signature p {
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+/* Gallery Section */
+.gallery-section {
+  padding: 100px 0;
+  background: var(--clr-off-white);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-top: 50px;
+}
+
+.flyer-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  background: var(--clr-white);
+}
+
+.flyer-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.flyer-item:hover img {
+  transform: scale(1.08);
+}
+
+.flyer-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.flyer-item:hover .flyer-overlay {
+  opacity: 1;
+}
+
+.flyer-overlay span {
+  color: var(--clr-white);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1200px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}

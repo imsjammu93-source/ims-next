@@ -1,0 +1,167 @@
+/* Alumni Page Styles */
+
+.alumni-page {
+  background: var(--clr-white);
+}
+
+.alumni-intro {
+  padding: 100px 0 60px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Spotlight Section */
+.spotlight-section {
+  padding: 80px 0;
+  background: var(--clr-off-white);
+}
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.alumni-card {
+  background: var(--clr-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  border-bottom: 4px solid transparent;
+}
+
+.alumni-card:hover {
+  transform: translateY(-10px);
+  border-bottom-color: var(--clr-gold);
+}
+
+.alumni-img {
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.alumni-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.alumni-info {
+  padding: 30px;
+  text-align: center;
+}
+
+.alumni-info h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+  color: var(--clr-navy);
+}
+
+.alumni-batch {
+  font-size: 0.85rem;
+  color: var(--clr-gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.alumni-role {
+  font-size: 0.95rem;
+  color: var(--clr-text);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.alumni-quote {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--clr-muted);
+  line-height: 1.6;
+}
+
+/* Benefits Section */
+.benefits-section {
+  padding: 100px 0;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.benefit-item {
+  text-align: center;
+  padding: 20px;
+}
+
+.benefit-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--clr-gold-pale);
+  color: var(--clr-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 25px;
+  transition: var(--transition);
+}
+
+.benefit-item:hover .benefit-icon {
+  background: var(--clr-gold);
+  color: var(--clr-white);
+  transform: rotateY(180deg);
+}
+
+.benefit-item h4 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--clr-navy);
+}
+
+.benefit-item p {
+  font-size: 0.9rem;
+  color: var(--clr-muted);
+  line-height: 1.5;
+}
+
+/* Registration CTA */
+.alumni-cta {
+  background: linear-gradient(135deg, var(--clr-navy-dark), var(--clr-navy));
+  padding: 100px 0;
+  color: var(--clr-white);
+  text-align: center;
+}
+
+.alumni-cta h2 {
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 992px) {
+  .spotlight-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .spotlight-grid, .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  .alumni-cta h2 {
+    font-size: 2rem;
+  }
+}
