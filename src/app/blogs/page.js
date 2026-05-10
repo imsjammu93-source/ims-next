@@ -80,6 +80,9 @@ export default function BlogsPage() {
         getBlogs(null, 0),
         getBlogCategories(0),
       ]);
+
+ 
+      
       setBlogs(blogData);
       setCategories(catData);
       setLoading(false);

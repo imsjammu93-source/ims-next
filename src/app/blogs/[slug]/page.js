@@ -70,8 +70,8 @@ export default async function BlogDetailPage({ params }) {
       <PageHeader 
         title={blog.title}
         subtitle={`${blog.category_name} • ${formattedDate} • By ${blog.author_name || 'IMS Faculty'}`}
-        bgImage={blog.image_url || "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=1920"}
-      />
+               bgImage="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&q=80&w=1920"
+   />
 
       <main className="blog-detail-page">
         <section className="section">
@@ -81,6 +81,28 @@ export default async function BlogDetailPage({ params }) {
               {/* MAIN ARTICLE */}
               <div className="tpc-message-left">
                 <article className="blog-main-article">
+                  {/* FEATURED IMAGE */}
+                  {blog.image_url && (
+                    <div className="blog-featured-image" style={{ 
+                      marginBottom: '40px', 
+                      borderRadius: '20px', 
+                      overflow: 'hidden', 
+                      boxShadow: '0 10px 30px rgba(11, 26, 51, 0.1)',
+                      border: '1px solid #f1f5f9'
+                    }}>
+                      <img 
+                        src={blog.image_url} 
+                        alt={blog.title} 
+                        style={{ 
+                          width: '100%', 
+                          height: 'auto', 
+                          maxHeight: '550px',
+                          display: 'block', 
+                          objectFit: 'cover' 
+                        }} 
+                      />
+                    </div>
+                  )}
                   <div 
                     className="blog-content-body"
                     dangerouslySetInnerHTML={{ __html: blog.content }}

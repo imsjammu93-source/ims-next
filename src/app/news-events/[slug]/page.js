@@ -6,6 +6,7 @@ import PageHeader from '@/layoutComponents/PageHeader';
 import { getEventBySlug, getEvents } from '@/lib/fetchData';
 import { contactInfo } from '@/config/contactInfo';
 import '@/assets/css/events.css';
+import { assetsInfo } from '@/config/assetsInfo';
 
 /**
  * SEO - Dynamic Metadata
@@ -59,7 +60,7 @@ export default async function EventDetailPage({ params }) {
       <PageHeader 
         title={event.title}
         subtitle={`News & Events • ${formattedDate}`}
-        bgImage={event.full_image_path || "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1920"}
+        bgImage={"https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1920"}
       />
 
       <main className="event-detail-page">
@@ -96,6 +97,29 @@ export default async function EventDetailPage({ params }) {
                     </div>
                   </div>
                 </div>
+
+                {/* FEATURED IMAGE */}
+                {event.full_image_path && (
+                  <div className="event-featured-image" style={{ 
+                    marginBottom: '40px', 
+                    borderRadius: '24px', 
+                    overflow: 'hidden', 
+                    boxShadow: '0 10px 30px rgba(11, 26, 51, 0.1)',
+                    border: '1px solid #f1f5f9'
+                  }}>
+                    <img 
+                      src={event.full_image_path} 
+                      alt={event.title} 
+                      style={{ 
+                        width: '100%', 
+                        height: 'auto', 
+                        maxHeight: '600px',
+                        display: 'block', 
+                        objectFit: 'cover' 
+                      }} 
+                    />
+                  </div>
+                )}
 
                 {/* FULL DESCRIPTION */}
                 <div className="event-rich-text">
