@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getEvents } from '@/lib/fetchData';
+import '@/assets/css/events.css';
 
 function EventsSection() {
   const [events, setEvents] = useState([]);
@@ -21,7 +22,7 @@ function EventsSection() {
   return (
     <section id="events-home" className="section" style={{ background: '#f8fafc' }}>
       <div className="container">
-        <div className="text-center" data-aos="fade-up" style={{ marginBottom: '50px' }}>
+        <div className="text-center" data-aos="fade-up" style={{ marginBottom: '60px' }}>
           <div className="section-label">Campus Happenings</div>
           <h2 className="section-title">
             News & <span>Events</span>
@@ -29,80 +30,62 @@ function EventsSection() {
           <p className="section-desc">Stay updated with the latest seminars, workshops, and achievements at IMS Jammu.</p>
         </div>
 
-        <div className="row g-4">
+        {/* Using the beautiful design system from events.css */}
+        <div className="events-grid home-events-grid">
           {events.map((event, index) => {
             const eventDate = new Date(event.created_date);
             const day = eventDate.getDate();
             const month = eventDate.toLocaleString('en-US', { month: 'short' });
 
             return (
-              <div key={index} className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay={index * 100}>
-                <Link href={`/news-events/${event.slug}`} style={{ textDecoration: 'none' }}>
-                  <div className="event-card-home" style={{ 
-                    background: '#fff', 
-                    borderRadius: '20px', 
-                    overflow: 'hidden', 
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    transition: 'all 0.3s ease',
-                    border: '1px solid #f1f5f9'
-                  }}>
-                    <div style={{ position: 'relative', height: '200px', overflow: 'hidden' }}>
-                      <img 
-                        src={event.full_image_path || '/assets/images/placeholder.jpg'} 
-                        alt={event.title} 
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
-                        className="event-img"
-                      />
-                      <div style={{ 
-                        position: 'absolute', 
-                        top: '15px', 
-                        left: '15px', 
-                        background: 'var(--clr-gold)', 
-                        color: '#fff', 
-                        padding: '5px 12px', 
-                        borderRadius: '10px', 
-                        textAlign: 'center',
-                        boxShadow: '0 5px 15px rgba(255, 45, 30, 0.3)'
-                      }}>
-                        <span style={{ display: 'block', fontSize: '1.2rem', fontWeight: 800, lineHeight: 1 }}>{day}</span>
-                        <span style={{ display: 'block', fontSize: '0.65rem', textTransform: 'uppercase', fontWeight: 700 }}>{month}</span>
-                      </div>
-                    </div>
-                    <div style={{ padding: '25px', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                      <h4 style={{ color: 'var(--clr-navy)', fontSize: '1.2rem', fontWeight: 800, marginBottom: '12px', lineHeight: 1.4 }}>
-                        {event.title}
-                      </h4>
-                      <p style={{ color: '#64748b', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '20px' }}>
-                        {event.short_desc?.substring(0, 100)}...
-                      </p>
-                      <div style={{ marginTop: 'auto', color: 'var(--clr-gold)', fontWeight: 700, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        View Details <i className="fas fa-arrow-right" style={{ fontSize: '0.7rem' }} />
-                      </div>
-                    </div>
+              <Link key={index} href={`/news-events/${event.slug}`} className="event-card" data-aos="fade-up" data-aos-delay={index * 100}>
+                <div className="event-thumb">
+                  <img 
+                    src={event.full_image_path || '/assets/images/placeholder.jpg'} 
+                    alt={event.title} 
+                  />
+                  <div className="event-date-badge">
+                    <span className="day">{day}</span>
+                    <span className="month">{month}</span>
                   </div>
-                </Link>
-              </div>
+                </div>
+                <div className="event-body">
+                  <h4 className="event-title">
+                    {event.title}
+                  </h4>
+                  <p className="event-excerpt">
+                    {event.short_desc || (event.full_desc?.replace(/<[^>]*>/g, '').substring(0, 120) + '...')}
+                  </p>
+                  <div className="event-btn" style={{ marginTop: 'auto', fontWeight: 800, color: 'var(--clr-gold)', fontSize: '0.85rem' }}>
+                    View Event Details <i className="fas fa-arrow-right" style={{ marginLeft: '8px' }} />
+                  </div>
+                </div>
+              </Link>
             );
           })}
         </div>
 
-        <div className="text-center" style={{ marginTop: '50px' }}>
-          <Link href="/news-events" className="btn btn-primary-outline">
-            Explore All Happenings <i className="fas fa-calendar-alt" style={{ marginLeft: '10px' }} />
+        <div className="text-center" style={{ marginTop: '60px' }}>
+          <Link href="/news-events" className="btn btn-primary">
+            Explore All Events <i className="fas fa-calendar-alt" style={{ marginLeft: '10px' }} />
           </Link>
         </div>
       </div>
 
       <style jsx>{`
-        .event-card-home:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+        .home-events-grid {
+          grid-template-columns: repeat(3, 1fr) !important;
+          gap: 30px !important;
         }
-        .event-card-home:hover .event-img {
-          transform: scale(1.1);
+        @media (max-width: 991px) {
+          .home-events-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 767px) {
+          .home-events-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
     </section>
