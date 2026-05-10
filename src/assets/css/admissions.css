@@ -180,3 +180,202 @@
     margin-top: 50px;
   }
 }
+
+/* ==============================================
+   Home Admission Modal - Global Forced Styles
+   ============================================== */
+.admission-modal-root {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 999999 !important; /* Forces it above ALL headers/top bars */
+  pointer-events: auto;
+}
+
+.admission-modal-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(8, 29, 55, 0.8) !important; /* Navy tint */
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  animation: fadeInModal 0.4s ease;
+}
+
+.admission-modal-wrapper {
+  position: relative !important;
+  width: 90% !important;
+  max-width: 550px !important; /* Increased width as requested */
+  z-index: 10 !important;
+  animation: modalBounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.admission-modal-content {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Internal Card overrides to make it compact */
+.modal-card-ui {
+  margin: 0 !important;
+  padding: 35px 30px 30px 30px !important; /* Adjusted padding for wider modal */
+  border: none !important;
+}
+
+.modal-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--clr-gold), #ffcc33);
+}
+
+.modal-header-section {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.modal-badge {
+  display: inline-block;
+  background: rgba(201, 150, 12, 0.1);
+  color: var(--clr-gold);
+  padding: 5px 15px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.modal-header-section h3 {
+  font-size: 1.6rem !important;
+  color: var(--clr-navy) !important;
+  font-weight: 800 !important;
+  margin-bottom: 8px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.modal-header-section p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.modal-form-layout .form-group {
+  margin-bottom: 15px;
+}
+
+.modal-form-layout label {
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.modal-form-layout .form-control {
+  padding: 12px 15px;
+  font-size: 0.9rem;
+  height: 45px;
+}
+
+.modal-form-layout textarea.form-control {
+  height: auto;
+  min-height: 100px; /* Increased height for the message box */
+  resize: vertical;
+}
+
+.modal-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.modal-submit-btn {
+  width: 100%;
+  background: var(--clr-navy);
+  color: #ffffff;
+  border: none;
+  padding: 15px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-submit-btn:hover {
+  background: var(--clr-gold);
+  color: var(--clr-navy);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+
+.admission-modal-close {
+  position: absolute;
+  top: 15px; /* Moved fully inside the container */
+  right: 15px; /* Moved fully inside the container */
+  width: 32px;
+  height: 32px;
+  background: #f4f4f4; /* Softer background since it's inside */
+  color: var(--clr-navy);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.admission-modal-close:hover {
+  background: #e0e0e0;
+  color: #000;
+  transform: scale(1.1) rotate(90deg);
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalBounceIn {
+  0% { transform: scale(0.8) translateY(40px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@media (max-width: 576px) {
+  .modal-form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .admission-modal-wrapper {
+    max-width: 92% !important;
+  }
+  .admission-modal-close {
+    top: 10px;
+    right: 10px;
+    background: #f1f1f1;
+    color: #333;
+  }
+  .admission-modal-close:hover {
+    background: #e1e1e1;
+    color: #000;
+  }
+}

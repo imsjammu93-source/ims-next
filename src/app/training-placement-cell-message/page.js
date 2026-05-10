@@ -1,32 +1,64 @@
-import React from 'react'
+'use client';
+import React, { useState, useEffect } from 'react'
 import PageHeader from '@/layoutComponents/PageHeader'
 import Layout from '@/layoutComponents/Layout'
 import QuickLinksCard from '@/components/QuickLinksCard'
 import '@/assets/css/tpc.css'
-
-export const metadata = {
-  title: "Training & Placement Cell Message | IMS Jammu",
-  description: "Read the message from the Training & Placement Cell (TPC) at IMS Jammu regarding our commitment to student employability and industry partnerships.",
-}
+import { assetsInfo } from '@/config/assetsInfo'
 
 const placementFlyers = [
-  "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1507679799987-c73774586594?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
-  "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=800",
+ assetsInfo.placementImg1,
+ assetsInfo.placementImg2,
+ assetsInfo.placementImg3,
+ assetsInfo.placementImg4,
+ assetsInfo.placementImg5,
+ assetsInfo.placementImg6,
+ assetsInfo.placementImg7,
+ assetsInfo.placementImg8,
+ assetsInfo.placementImg9,
+ assetsInfo.placementImg10,
 ];
 
 function TPCPage() {
+  const [selectedFlyerIndex, setSelectedFlyerIndex] = useState(null);
+
+  const openLightbox = (index) => {
+    setSelectedFlyerIndex(index);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    setSelectedFlyerIndex(null);
+    document.body.style.overflow = 'auto';
+  };
+
+  const showNext = (e) => {
+    e.stopPropagation();
+    setSelectedFlyerIndex((prev) => (prev + 1) % placementFlyers.length);
+  };
+
+  const showPrev = (e) => {
+    e.stopPropagation();
+    setSelectedFlyerIndex((prev) => (prev - 1 + placementFlyers.length) % placementFlyers.length);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (selectedFlyerIndex === null) return;
+      if (e.key === 'ArrowRight') showNext(e);
+      if (e.key === 'ArrowLeft') showPrev(e);
+      if (e.key === 'Escape') closeLightbox();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedFlyerIndex]);
+
   return (
     <Layout>
       <PageHeader
         title="Training & Placement Cell Message"
         subtitle="Bridging the gap between academic learning and industry expectations."
-        bgImage="https://images.unsplash.com/photo-1571867708487-1b39203b0355?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.placementPageHeaderImg}
       />
 
       <main className="tpc-page">
@@ -79,10 +111,16 @@ function TPCPage() {
 
             <div className="gallery-grid">
               {placementFlyers.map((url, index) => (
-                <div key={index} className="flyer-item">
+                <div 
+                  key={index} 
+                  className="flyer-item"
+                  onClick={() => openLightbox(index)}
+                  style={{ cursor: 'pointer' }}
+                >
                   <img src={url} alt={`Placement Flyer ${index + 1}`} />
                   <div className="flyer-overlay">
-                    <span>Placement Achievement</span>
+                    <i className="fas fa-search-plus" style={{ fontSize: '1.5rem', color: 'white', marginBottom: '10px' }}></i>
+                    <span>View Achievement</span>
                   </div>
                 </div>
               ))}
@@ -90,6 +128,35 @@ function TPCPage() {
           </div>
         </section>
       </main>
+
+      {/* Fullscreen Lightbox / Slider */}
+      {selectedFlyerIndex !== null && (
+        <div className="custom-lightbox active" onClick={closeLightbox}>
+          <button className="lightbox-nav-btn prev" onClick={showPrev}>
+            <i className="fas fa-chevron-left" />
+          </button>
+          
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={placementFlyers[selectedFlyerIndex]} 
+              alt={`Placement Flyer ${selectedFlyerIndex + 1}`} 
+              className="lightbox-img" 
+            />
+            <div className="lightbox-caption">
+              Placement Success Milestone
+              <span className="lightbox-counter">{selectedFlyerIndex + 1} / {placementFlyers.length}</span>
+            </div>
+          </div>
+
+          <button className="lightbox-nav-btn next" onClick={showNext}>
+            <i className="fas fa-chevron-right" />
+          </button>
+
+          <button className="lightbox-close-btn" onClick={closeLightbox}>
+            <i className="fas fa-times" />
+          </button>
+        </div>
+      )}
     </Layout>
   )
 }

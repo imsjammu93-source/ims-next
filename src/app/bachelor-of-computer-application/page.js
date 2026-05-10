@@ -3,6 +3,7 @@ import Layout from '@/layoutComponents/Layout'
 import PageHeader from '@/layoutComponents/PageHeader'
 import QuickLinksCard from '@/components/QuickLinksCard'
 import '@/assets/css/programs.css'
+import { assetsInfo } from '@/config/assetsInfo'
 
 export const metadata = {
   title: "Bachelor of Computer Applications (BCA) | IMS Jammu",
@@ -15,7 +16,7 @@ function BCAProgramPage() {
       <PageHeader
         title="Bachelor of Computer Applications (BCA)"
         subtitle="Empowering the next generation of computing professionals and IT leaders."
-        bgImage="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.bcaPageHeaderImg}
       />
 
       <main className="program-page">
@@ -26,7 +27,7 @@ function BCAProgramPage() {
             <div className="program-main-content">
               
               <img 
-                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200" 
+                src={assetsInfo.bcaFlyerImg} 
                 alt="Computing Labs at IMS" 
                 className="program-feature-img" 
               />

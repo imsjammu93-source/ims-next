@@ -3,7 +3,8 @@ import PageHeader from '@/layoutComponents/PageHeader'
 import Layout from '@/layoutComponents/Layout'
 import AboutSection from '@/components/AboutSection'
 import WhyChooseSection from '@/components/WhyChooseSection'
-import StatsSection from '@/components/StatsSection'
+import { assetsInfo } from '@/config/assetsInfo'
+
 function AboutPage() {
   return (
    
@@ -11,7 +12,7 @@ function AboutPage() {
     <PageHeader
         title="About IMS"
         subtitle="Discover the journey of excellence and innovation at Institute of Management Sciences, Jammu."
-        bgImage="/assets/images/campus.jpg"
+        bgImage={assetsInfo.aboutUsPageHeaderImg}
       />
 
       <div className="inline-stats-bar">

@@ -1,0 +1,326 @@
+/* ========================================
+   LOGIN PAGE — PREMIUM STYLESHEET
+   IMS Jammu Admin Portal
+   ======================================== */
+
+.login-root {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: #f8fafc;
+}
+
+/* ---- LEFT PANEL ---- */
+.login-left {
+  flex: 1;
+  background: linear-gradient(145deg, #0b1a33 0%, #1a3060 60%, #0d2248 100%);
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-left__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 60px;
+}
+
+.login-logo__icon {
+  width: 52px;
+  height: 52px;
+  background: #ff2d1e; /* Using Brand Red */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.login-logo__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-logo__text span:first-child {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1.2;
+}
+
+.login-logo__text span:last-child {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+
+.login-hero-text h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  color: white;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.login-hero-text h1::after {
+  content: '.';
+  color: #ff2d1e;
+}
+
+.login-hero-text p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  max-width: 400px;
+  margin-bottom: 48px;
+}
+
+.login-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-feature {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.login-feature__icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 45, 30, 0.15);
+  border: 1px solid rgba(255, 45, 30, 0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff2d1e;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* Decorative circles */
+.login-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.login-bg-circle--1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 45, 30, 0.08) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+}
+
+.login-bg-circle--2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+  bottom: -60px;
+  left: 20%;
+}
+
+/* ---- RIGHT PANEL ---- */
+.login-right {
+  width: 520px;
+  flex-shrink: 0;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 60px;
+  box-shadow: -10px 0 50px rgba(0,0,0,0.05);
+}
+
+.login-form-card {
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-form-header {
+  margin-bottom: 32px;
+}
+
+.login-form-header h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0b1a33;
+  margin-bottom: 8px;
+}
+
+.login-form-header p {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.login-error {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #dc2626;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 0.84rem;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-field label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #374151;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.login-input-wrap {
+  position: relative;
+}
+
+.login-input-wrap i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.login-input-wrap input {
+  width: 100%;
+  padding: 15px 16px 15px 48px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  outline: none;
+  font-family: inherit;
+  background: #f8fafc;
+  color: #1e293b;
+  transition: all 0.3s ease;
+}
+
+.login-input-wrap input:focus {
+  border-color: #ff2d1e;
+  background: #ffffff;
+  box-shadow: 0 10px 20px rgba(255, 45, 30, 0.08);
+}
+
+.login-input-wrap input:focus + i {
+  color: #ff2d1e;
+}
+
+.login-input-wrap input::placeholder {
+  color: #cbd5e1;
+}
+
+.login-submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: #0b1a33;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  box-shadow: 0 10px 25px rgba(11, 26, 51, 0.2);
+}
+
+.login-submit-btn:hover:not(:disabled) {
+  background: #1a3060;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(11, 26, 51, 0.3);
+}
+
+.login-submit-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.login-footer-note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .login-right { width: 450px; }
+}
+
+@media (max-width: 900px) {
+  .login-left {
+    display: none;
+  }
+  .login-right {
+    width: 100%;
+    padding: 40px 24px;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-right {
+    padding: 30px 20px;
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+  .login-form-header h2 {
+    font-size: 1.6rem;
+  }
+}

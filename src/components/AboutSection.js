@@ -61,7 +61,7 @@ function AboutSection() {
       <div className="campus-visual" data-aos="fade-left">
         <div className="campus-img-wrap">
           <img
-            src="assets/images/campus.jpg"
+            src="assets/images/ims-slider1.jpg"
             alt="IMS Jammu Campus — 25 Acres, Akhnoor Road"
             loading="lazy"
             className="campus-img"

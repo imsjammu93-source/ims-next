@@ -4,7 +4,7 @@ import PageHeader from '@/layoutComponents/PageHeader'
 import QuickLinksCard from '@/components/QuickLinksCard'
 import '@/assets/css/why-ims.css'
 import AwardsSection from '@/components/AwardsSection'
-
+import { assetsInfo } from '@/config/assetsInfo'
 export const metadata = {
   title: "Why Choose IMS Jammu? | The IMS Advantage",
   description: "Discover why the Institute of Management Sciences (IMS) is the preferred choice for management and IT education in Jammu. Awards, excellence, and legacy.",
@@ -14,9 +14,9 @@ function WhyIMSPage() {
   return (
     <Layout>
       <PageHeader
-        title="Why Choose IMS Jammu?"
+        title="Why Choose IMS?"
         subtitle="Discover the IMS advantage: Excellence in education, professional growth, and global recognition."
-        bgImage="https://images.unsplash.com/photo-1541339907198-e08759dfc3ef?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.whychoosePageHeaderImg}
       />
 
       <main className="why-ims-page">
@@ -46,7 +46,7 @@ function WhyIMSPage() {
                 {/* Pillar 1 */}
                 <div className="pillar-item" data-aos="fade-up">
                   <img 
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800" 
+                    src={assetsInfo.whychooseImg1} 
                     alt="Education beyond curriculum" 
                     className="pillar-image" 
                   />
@@ -64,7 +64,7 @@ function WhyIMSPage() {
                 {/* Pillar 2 */}
                 <div className="pillar-item" data-aos="fade-up">
                   <img 
-                    src="https://images.unsplash.com/photo-1523240715632-d984bb4b9749?auto=format&fit=crop&q=80&w=800" 
+                    src={assetsInfo.whychooseImg2} 
                     alt="Vibrant Learning Community" 
                     className="pillar-image" 
                   />
@@ -79,7 +79,7 @@ function WhyIMSPage() {
                 {/* Pillar 3 */}
                 <div className="pillar-item" data-aos="fade-up">
                   <img 
-                    src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=800" 
+                    src={assetsInfo.whychooseImg3} 
                     alt="Networking & Exposure" 
                     className="pillar-image" 
                   />
@@ -94,7 +94,7 @@ function WhyIMSPage() {
                 {/* Pillar 4 */}
                 <div className="pillar-item" data-aos="fade-up">
                   <img 
-                    src="https://images.unsplash.com/photo-1454165833767-027ffea9e77b?auto=format&fit=crop&q=80&w=800" 
+                    src={assetsInfo.whychooseImg4} 
                     alt="Theory vs Practice" 
                     className="pillar-image" 
                   />

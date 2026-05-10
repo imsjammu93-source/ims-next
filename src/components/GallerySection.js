@@ -1,17 +1,29 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 
+import { assetsInfo } from '@/config/assetsInfo';
+
 const galleryImages = [
-  { src: "assets/images/gallery-sports.jpg", title: "Sports Day 2024", type: "wide" },
-  { src: "assets/images/gallery-arts.jpg", title: "Art Exhibition", type: "small" },
-  { src: "assets/images/gallery-library.jpg", title: "Central Library", type: "tall" },
-  { src: "assets/images/gallery-tech.jpg", title: "Technology Lab", type: "large" },
-  { src: "assets/images/gallery-graduation.jpg", title: "Annual Graduation 2024", type: "wide" },
-  { src: "assets/images/wing-preprimary.jpg", title: "Pre-Primary Carnival", type: "small" },
-  { src: "assets/images/hero3.jpg", title: "Annual Day 2024", type: "tall" },
-  { src: "assets/images/hero2.jpg", title: "Advanced Science Lab", type: "small" },
-  { src: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800", title: "Campus Grounds", type: "wide" },
-  { src: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=800", title: "Academic block", type: "small" },
+  { src: assetsInfo.campusImg1, title: "Manthan’24 – A Business and Technical conclave", type: "large" },
+  { src: assetsInfo.campusImg2, title: "Scribble Day", type: "small" },
+  { src: assetsInfo.campusImg3, title: "Frequent visit to Industries.", type: "wide" },
+  { src: assetsInfo.campusImg4, title: "Research, Innovate & Thrive!", type: "small" },
+  { src: assetsInfo.campusImg5, title: "Student of the Month- A regular practice", type: "tall" },
+  { src: assetsInfo.campusImg6, title: "Ruksat 2K24- Farewell for outgoing batch", type: "wide" },
+  { src: assetsInfo.campusImg7, title: "Green Campus!", type: "small" },
+  { src: assetsInfo.campusImg8, title: "Love Books ?", type: "tall" },
+  { src: assetsInfo.campusImg9, title: "JOY OF SHARING!", type: "wide" },
+  { src: assetsInfo.campusImg10, title: "Feeling Hungry!", type: "small" },
+  { src: assetsInfo.campusImg11, title: "Supporting Faculty", type: "small" },
+  { src: assetsInfo.campusImg12, title: "Tech-Buzz", type: "large" },
+  { src: assetsInfo.campusImg13, title: "Student Council 2k24", type: "wide" },
+  { src: assetsInfo.campusImg14, title: "Swach Bharat Abhiyan", type: "small" },
+  { src: assetsInfo.campusImg15, title: "Fully Furnished Labs", type: "tall" },
+  { src: assetsInfo.campusImg16, title: "Er. Niraj Dubey- Emerging trends on Cybersecurity", type: "wide" },
+  { src: assetsInfo.campusImg17, title: "We develop you overall !!", type: "small" },
+  { src: assetsInfo.campusImg18, title: "Showcase your TALENT!", type: "large" },
+  { src: assetsInfo.campusImg19, title: "Festivities", type: "small" },
+  { src: assetsInfo.campusImg20, title: "Joy of Learning!", type: "wide" },
 ];
 
 function GallerySection() {

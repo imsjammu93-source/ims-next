@@ -1,146 +1,208 @@
-import React from 'react'
-import Layout from '@/layoutComponents/Layout'
-import PageHeader from '@/layoutComponents/PageHeader'
-import '@/assets/css/alumni.css'
+'use client';
+import React, { useState } from 'react';
+import Layout from '@/layoutComponents/Layout';
+import PageHeader from '@/layoutComponents/PageHeader';
+import QuickLinksCard from '@/components/QuickLinksCard';
+import '@/assets/css/alumni.css';
+import { assetsInfo } from '@/config/assetsInfo';
 
-import QuickLinksCard from '@/components/QuickLinksCard'
-
-export const metadata = {
-  title: "Alumni Network | IMS Jammu",
-  description: "Join the IMS Jammu Alumni Association. Connect with a global network of over 15,000 graduates and explore mentorship and career opportunities.",
-}
-
-const alumniSpotlight = [
-  {
-    name: "Sandeep Malhotra",
-    batch: "MBA - Class of 2012",
-    role: "Senior VP, HDFC Bank",
-    quote: "The analytical foundation and leadership skills I gained at IMS were pivotal in my journey to executive management.",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    name: "Priyanka Sharma",
-    batch: "BCA - Class of 2015",
-    role: "Senior Software Engineer, Google",
-    quote: "IMS provided the perfect blend of technical rigor and creative freedom that prepared me for the global tech landscape.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400"
-  },
-  {
-    name: "Rajesh Khanna",
-    batch: "BBA - Class of 2010",
-    role: "Entrepreneur & Founder, TechVision",
-    quote: "The entrepreneurial ecosystem at IMS gave me the confidence to build my own venture from the ground up.",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400"
-  }
+const placementData = [
+  { name: "SALMAN SHEIKH", batch: "2007-2010", stream: "BBA", designation: "BUSINESS BANKING", organisation: "EMIRATES ISLAMIC BANK – UAE" },
+  { name: "ANKUSH", batch: "2008-2010", stream: "MBA", designation: "TEAM MANAGER", organisation: "AMAZON" },
+  { name: "SAMIR MAHAJAN", batch: "2008-2010", stream: "MBA", designation: "ASSISTANT MANAGER", organisation: "UCO BANK" },
+  { name: "ROBINA ABROL", batch: "2008-2010", stream: "MBA", designation: "ASSISTANT MANAGER", organisation: "APOLLO MUNICH HEALTH INSURANCE" },
+  { name: "PEER ALTAF", batch: "2008-2009", stream: "MBA", designation: "NRI RELATIONSHIP MANAGER", organisation: "AXIS BANK" },
+  { name: "PRIYANKA YADAV", batch: "2008-2010", stream: "MBA", designation: "ASST. MANAGER", organisation: "CAP GEMINI" },
+  { name: "MANISH SHARMA", batch: "2008-2010", stream: "MBA", designation: "RAM ENGINEER", organisation: "ERICSSON" },
+  { name: "MANVI RAINA", batch: "2008-2010", stream: "MBA", designation: "PO", organisation: "SBI BANK" },
+  { name: "AMAN GUPTA", batch: "2008-2010", stream: "MBA", designation: "AREA MANAGER", organisation: "CIPLA" },
+  { name: "SAVITA KUMARI SHARMA", batch: "2008-2010", stream: "MBA", designation: "ASST. MANAGER", organisation: "CANARA BANK" },
+  { name: "KAILASH SINGH JAMWAL", batch: "2008-2010", stream: "MBA", designation: "PO", organisation: "JK BANK HIRANAGAR" },
+  { name: "ANKUSH GUPTA", batch: "2008-2010", stream: "MBA", designation: "ASST. MANAGER", organisation: "IBM - CONCENTRIX INDIA" },
+  { name: "PRANAV DUBEY", batch: "2008-2010", stream: "MBA", designation: "PO", organisation: "JK BANK" },
+  { name: "AMIT SINGH", batch: "2008-2010", stream: "MBA", designation: "ASST. MANAGER", organisation: "CERA" },
+  { name: "MANISH ANAND", batch: "2008-2010", stream: "MBA", designation: "TERRITORY MANAGER", organisation: "LIVGUARD" },
+  { name: "SHAMLAL CHOUDHARY", batch: "2008-2010", stream: "MBA", designation: "ASM", organisation: "MARICO LTD." },
+  { name: "PRANAV GUPTA", batch: "2008-2011", stream: "BBA", designation: "BRANCH MANAGER", organisation: "ICICI PRUDENTIAL MUTUAL FUND" },
+  { name: "AMBISHA SACHDEVA", batch: "2008-2010", stream: "MBA", designation: "HR MANAGER", organisation: "GLAXOSMITHKLINE" },
+  { name: "BASHARAT HUSSAIN SHAH", batch: "2009-2011", stream: "MBA", designation: "AREA EXECUTIVE", organisation: "ITC LIMITED" },
+  { name: "VIJAY KUMAR LANGEH", batch: "2009-2011", stream: "MBA", designation: "SENIOR HR", organisation: "SYSKA" },
+  { name: "ROMIT SODI", batch: "2009-2011", stream: "MBA", designation: "PROJECT COORDINATOR", organisation: "TATA GROUP" },
+  { name: "INDER PAL SINGH", batch: "2009-2011", stream: "MBA", designation: "OFFICER FINANCE", organisation: "UFLEX LIMITED" },
+  { name: "ADITYA SHARMA", batch: "2009-2011", stream: "MBA", designation: "EXECUTIVE - FOOD SERVICES", organisation: "MCCAIN FOODS INDIA PVT LTD" },
+  { name: "ANKIT BAKSHI", batch: "2009-2011", stream: "MBA", designation: "FIELD SALES CAPABILITY", organisation: "HINDUSTAN UNILEVER LIMITED" },
+  { name: "ADITYA MAHAJAN", batch: "2009-2011", stream: "MBA", designation: "MANAGER", organisation: "UNION BANK OF INDIA" },
+  { name: "ANKUSH SHARMA", batch: "2009-2011", stream: "MBA", designation: "REGIONAL MANAGER", organisation: "SERVOKON SYSTEMS LTD." },
+  { name: "SAHIL MAHAJAN", batch: "2009-2011", stream: "MBA", designation: "EXECUTIVE ASSOCIATE", organisation: "JK BANK" },
+  { name: "RISHI KUMAR", batch: "2009-2012", stream: "BCA", designation: "BRANCH MANAGER", organisation: "INDUSIND BANK" },
+  { name: "MOHIT SHARMA", batch: "2009-2011", stream: "BBA", designation: "DEPUTY MANAGER", organisation: "AXIS BANK" },
+  { name: "ROCKY BINDROO", batch: "2010-2012", stream: "MBA", designation: "AREA SALES MANAGER", organisation: "KAJARIA CERAMICS LTD" },
+  { name: "MANPREET KAUR SODHI", batch: "2010-2012", stream: "MBA", designation: "SENIOR OPERATIONS MANAGER", organisation: "IMMIGRATION ADVISERS NZ LTD" },
+  { name: "SANDEEP SHARMA", batch: "2010-2012", stream: "MBA", designation: "AREA SALES MANAGER", organisation: "JAQUAR & CO. PVT. LTD." },
+  { name: "SUNIL SACHDEVA", batch: "2011-2013", stream: "MBA", designation: "ASST. MANAGER", organisation: "IDBI BANK, PUNJAB" },
+  { name: "UJJWAL JALOTRA", batch: "2011-2014", stream: "BBA", designation: "TERITORY SALES MANAGER", organisation: "BHARTI AIRTEL" },
+  { name: "NIRMAL KUMAR", batch: "2011-2013", stream: "MBA", designation: "TELLER", organisation: "INDUSIND BANK LTD" },
+  { name: "PREETI RAINA", batch: "2013-2015", stream: "MBA", designation: "VALUE BANKER", organisation: "ICICI BANK" },
+  { name: "RUHI PANDITA", batch: "2013-2015", stream: "MBA", designation: "HR MANAGER", organisation: "TATA MOTORS" },
+  { name: "ANKUSH KHAJURIA", batch: "2013-2025", stream: "MBA", designation: "ASST. ASM", organisation: "ASIAN GRANITO INDIA LTD" },
+  { name: "ROHIT BAMBRA", batch: "2013-2015", stream: "MBA", designation: "RELATIONSHIP MANAGER", organisation: "KARVY STOCK BROKING" },
+  { name: "VIDISHA RAINA", batch: "2013-2015", stream: "MBA", designation: "AM", organisation: "UFLEX" },
+  { name: "BHANU PRATAP SINGH", batch: "2013-2015", stream: "MBA", designation: "BRANCH MANAGER", organisation: "HDFC SECURITIES" },
+  { name: "WASIM AKHTAR", batch: "2013-2015", stream: "MBA", designation: "BRANCH MANAGER", organisation: "BOMBAY STOCK EXCHANGE" },
+  { name: "SHIVANI JAMWAL", batch: "2014-2016", stream: "MBA", designation: "CSO AND SDO", organisation: "RELIANCE GENERAL INSURANCE" },
+  { name: "ARZOO MAHAJAN", batch: "2014-2015", stream: "MBA", designation: "ASST. MANAGER", organisation: "HDFC BANK" },
+  { name: "NIKHIL", batch: "2014-2016", stream: "MBA", designation: "MANAGER", organisation: "BATA INDIA LTD." },
+  { name: "CHETAN JAMWAL", batch: "2014-2017", stream: "BBA", designation: "ASSOCIATE", organisation: "EUREKA FORBES" },
+  { name: "ROHIT KUMAR", batch: "2015-2018", stream: "BBA", designation: "RELATIONSHIP MANAGER", organisation: "TOYOTA" },
+  { name: "SHUBANGI", batch: "2015-2017", stream: "MBA", designation: "OPERATIONS ANALYST", organisation: "HDFC BANK" },
+  { name: "SONIA", batch: "2015-2017", stream: "MBA", designation: "HR COORDINATOR", organisation: "RADISSON BLU" },
+  { name: "SHUBAM SAWHNEY", batch: "2015-2017", stream: "MBA", designation: "ASST. MANAGER", organisation: "CEASEFIRE INDUSTRIES" },
+  { name: "NEEL SAGAR MENGI", batch: "2015-2017", stream: "MBA", designation: "RELATIONSHIP EXECUTIVE", organisation: "J&K BANK" },
+  { name: "ESHAN SHARMA", batch: "2015-2017", stream: "MBA", designation: "BDA ATL", organisation: "WALMART INDIA" },
+  { name: "KULBHUSHAN RAINA", batch: "2015-2017", stream: "MBA", designation: "PROCESS ASSOCIATE", organisation: "GENPACT" },
+  { name: "AMAR MUSSA", batch: "2016-2018", stream: "MBA", designation: "FINANCIAL SERVICE CONSULTANT", organisation: "ICICI PRUDENTIAL" },
+  { name: "ROSHNI ARORA", batch: "2016-2018", stream: "MBA", designation: "FINANCIAL CONSULTANT", organisation: "ICICI PRUDENTIAL" },
+  { name: "LOTIKA PURI", batch: "2016-2018", stream: "MBA", designation: "FINANCE SERVICE CONSULTANT", organisation: "ICICI PRUDENTIAL" },
+  { name: "AMAR DEEP SINGH", batch: "2016-2018", stream: "MBA", designation: "DIRECT SALES EXECUTIVE", organisation: "ASIAN PAINTS LTD" },
+  { name: "SONALI GUPTA", batch: "2016-2018", stream: "MBA", designation: "OPERATIONS EXECUTIVE", organisation: "FOODPANDA" },
+  { name: "MONIKA BHAT", batch: "2016-2018", stream: "MBA", designation: "HR RECRUITER", organisation: "ASSAN JOBS PVT LTD" },
+  { name: "SHUBHANGI CHOUHAN", batch: "2016-2018", stream: "MBA", designation: "FINANCIAL CONSULTANT", organisation: "ICICI PRUDENTIAL" },
+  { name: "VIKRANT SLATHIA", batch: "2016-2018", stream: "MBA", designation: "SALES REPRESENTATIVE", organisation: "AMBUJA CEMENT" },
 ];
 
 function AlumniPage() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('ALL');
+
+  const filteredData = placementData.filter(item => {
+    const matchesSearch = 
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      item.organisation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.designation.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesTab = activeTab === 'ALL' || item.stream === activeTab;
+    return matchesSearch && matchesTab;
+  });
+
   return (
     <Layout>
       <PageHeader
-        title="Alumni Network"
-        subtitle="Celebrating a legacy of success that spans across the globe."
-        bgImage="https://images.unsplash.com/photo-1523580494863-6f30312246d5?auto=format&fit=crop&q=80&w=1920"
+        title="Alumni & Placements"
+        subtitle="A legacy of leadership at the world's most prestigious organizations."
+        bgImage={assetsInfo.requirterPageHeader}
       />
 
-      <main className="alumni-page">
-        {/* INTRODUCTION WITH SIDEBAR */}
-        <section className="alumni-intro container text-center" style={{padding: '100px 0'}}>
-          <div className="layout-with-sidebar">
-            <div className="text-left" style={{textAlign: 'left'}}>
-              <div className="section-label" style={{justifyContent: 'flex-start'}}>Once an IMSian, Always an IMSian</div>
-              <h2 className="section-title" style={{textAlign: 'left'}}>A Community of <span>15,000+ Global Leaders</span></h2>
-              <p className="section-desc" style={{maxWidth: 'none'}}>
-                The IMS Alumni Association (IMSAA) serves as a bridge between the institute and its distinguished graduates, fostering a lifelong connection that extends far beyond the classroom. Our alumni are our greatest brand ambassadors, leading innovation across diverse industries from finance and technology to entrepreneurship and social leadership. 
-              </p>
-              <p className="section-desc" style={{marginTop: '20px', maxWidth: 'none'}}>
-                We believe that graduation is not the end, but the beginning of a meaningful relationship where the expertise and experiences of our graduates continue to inspire current students. By maintaining an active presence in our community, our alumni contribute to the institutional growth through mentorship, collaborative research, and industry-academia partnerships that define the IMS legacy of shared success.
-              </p>
-            </div>
-            
-            <aside className="sidebar">
-              <QuickLinksCard />
-            </aside>
-          </div>
-        </section>
-
-        {/* ALUMNI SPOTLIGHT */}
-        <section className="spotlight-section">
-          <div className="container">
-            <div className="text-center">
-              <div className="section-label">Success Stories</div>
-              <h2 className="section-title">Alumni <span>Spotlight</span></h2>
-            </div>
-
-            <div className="spotlight-grid">
-              {alumniSpotlight.map((alumnus, index) => (
-                <div key={index} className="alumni-card">
-                  <div className="alumni-img">
-                    <img src={alumnus.image} alt={alumnus.name} />
-                  </div>
-                  <div className="alumni-info">
-                    <span className="alumni-batch">{alumnus.batch}</span>
-                    <h3>{alumnus.name}</h3>
-                    <p className="alumni-role">{alumnus.role}</p>
-                    <p className="alumni-quote">"{alumnus.quote}"</p>
-                  </div>
+      <main className="alumni-page py-5">
+        <section className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              
+              {/* Placement Stats Highlights */}
+              <div className="alumni-stats-grid">
+                <div className="alumni-stat-card">
+                  <div className="stat-icon"><i className="fas fa-handshake" /></div>
+                  <h3>500+</h3>
+                  <p>Corporate Partners</p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+                <div className="alumni-stat-card">
+                  <div className="stat-icon"><i className="fas fa-users" /></div>
+                  <h3>15,000+</h3>
+                  <p>Success Stories</p>
+                </div>
+                <div className="alumni-stat-card">
+                  <div className="stat-icon"><i className="fas fa-trophy" /></div>
+                  <h3>90%</h3>
+                  <p>Placement Record</p>
+                </div>
+              </div>
 
-        {/* BENEFITS SECTION */}
-        <section className="benefits-section container">
-          <div className="text-center">
-            <div className="section-label">Stay Connected</div>
-            <h2 className="section-title">Why Join the <span>Association?</span></h2>
-          </div>
+              {/* Trusted By Recruiters Ticker */}
+              {/* <div className="recruiter-marquee">
+                <div className="marquee-title">Top Global Recruiters</div>
+                <div className="marquee-grid">
+                  <div className="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" /></div>
+                  <div className="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/HDFC_Bank_Logo.svg" alt="HDFC" /></div>
+                  <div className="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" /></div>
+                  <div className="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_logo.svg" alt="TATA" /></div>
+                  <div className="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Hindustan_Unilever.svg" alt="HUL" /></div>
+                  <div className="marquee-item"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Icici_bank_logo.svg" alt="ICICI" /></div>
+                </div>
+              </div> */}
 
-          <div className="benefits-grid">
-            <div className="benefit-item">
-              <div className="benefit-icon"><i className="fas fa-network-wired" /></div>
-              <h4>Global Networking</h4>
-              <p>Connect with fellow graduates across various industries and geographies.</p>
-            </div>
-            <div className="benefit-item">
-              <div className="benefit-icon"><i className="fas fa-user-graduate" /></div>
-              <h4>Mentorship</h4>
-              <p>Guide the next generation or find a mentor for your own career growth.</p>
-            </div>
-            <div className="benefit-item">
-              <div className="benefit-icon"><i className="fas fa-calendar" /></div>
-              <h4>Exclusive Events</h4>
-              <p>Get priority access to reunions, seminars, and networking mixers.</p>
-            </div>
-            <div className="benefit-item">
-              <div className="benefit-icon"><i className="fas fa-briefcase" /></div>
-              <h4>Career Support</h4>
-              <p>Access exclusive job postings and professional development resources.</p>
-            </div>
-          </div>
-        </section>
+              {/* Dashboard Header */}
+              <div className="placement-header mb-4 text-center">
+                <div className="section-label">Placement Directory</div>
+                <h2 className="section-title">Where Our <span>Alumni Shine</span></h2>
+              </div>
 
-        {/* CTA SECTION */}
-        <section className="alumni-cta">
-          <div className="container">
-            <h2 className="section-title" style={{color: 'white'}}>Update Your <span>Details</span></h2>
-            <p className="section-desc" style={{color: 'rgba(255,255,255,0.8)', maxWidth: '700px', margin: '0 auto 40px'}}>
-              Are you an IMS graduate? Stay in touch with your alma mater and be part of our growing success story. Register today to join the official Alumni Association.
-            </p>
-            <div className="btn-group justify-content-center">
-              <a href="#" className="btn btn-primary btn-lg">
-                Register as Alumni
-              </a>
-              <a href="mailto:imsjammu93@gmail.com" className="btn btn-outline-white btn-lg" style={{marginLeft: '20px', border: '1px solid white', color: 'white'}}>
-                Contact Association
-              </a>
+              {/* Search & Filters */}
+              <div className="alumni-controls">
+                <div className="alumni-tabs">
+                  {['ALL', 'MBA', 'BBA', 'BCA'].map(tab => (
+                    <button 
+                      key={tab} 
+                      className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                      onClick={() => setActiveTab(tab)}
+                    >
+                      {tab}
+                    </button>
+                  ))}
+                </div>
+                <div className="alumni-search">
+                  <i className="fas fa-search" />
+                  <input 
+                    type="text" 
+                    placeholder="Search by name, company or job title..." 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* Table UI */}
+              <div className="alumni-table-container">
+                <table className="alumni-table">
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Student Name</th>
+                      <th>Batch</th>
+                      <th>Stream</th>
+                      <th>Designation</th>
+                      <th>Organisation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredData.length > 0 ? (
+                      filteredData.map((alumnus, idx) => (
+                        <tr key={idx}>
+                          <td className="s-no">{idx + 1}</td>
+                          <td className="fw-bold text-dark">{alumnus.name}</td>
+                          <td>{alumnus.batch}</td>
+                          <td><span className={`stream-tag ${alumnus.stream.toLowerCase()}`}>{alumnus.stream}</span></td>
+                          <td>{alumnus.designation}</td>
+                          <td className="org-name">{alumnus.organisation}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="6">
+                          <div className="no-results">
+                            <i className="fas fa-search-minus fa-3x" />
+                            <p className="mt-3">No matching alumni records found.</p>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
             </div>
           </div>
         </section>
       </main>
     </Layout>
-  )
+  );
 }
 
-export default AlumniPage
+export default AlumniPage;

@@ -1,13 +1,17 @@
 "use client";
 
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Layout from '@/layoutComponents/Layout'
 import PageHeader from '@/layoutComponents/PageHeader'
 import QuickLinksCard from '@/components/QuickLinksCard'
+import { contactInfo } from '@/config/contactInfo'
 import '@/assets/css/admissions.css'
+import { assetsInfo } from '@/config/assetsInfo';
+import { getAdmissionSettings } from '@/lib/fetchData';
 
 export default function AdmissionsPage() {
   const [status, setStatus] = useState('idle');
+  const [settings, setSettings] = useState({ current_session: '2024-25' });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +19,20 @@ export default function AdmissionsPage() {
     course: '',
     message: ''
   });
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const data = await getAdmissionSettings();
+        if (data && !Array.isArray(data)) {
+          setSettings(data);
+        }
+      } catch (err) {
+        console.error("Admissions page settings fetch failed:", err);
+      }
+    };
+    fetchSettings();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,7 +43,7 @@ export default function AdmissionsPage() {
     setStatus('loading');
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/admissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -58,7 +76,7 @@ export default function AdmissionsPage() {
       <PageHeader 
         title="Admissions are Open Now!!!" 
         subtitle="Start your career with IMS Jammu today."
-        bgImage="https://images.unsplash.com/photo-152305085306e-8a3d3ef5c6ed?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.campusPageHeaderImg}
       />
 
       <main className="admissions-page">
@@ -67,7 +85,7 @@ export default function AdmissionsPage() {
             
             {/* Left Column: Easy to Read Info */}
             <div className="admission-content">
-              <div className="section-label" style={{justifyContent: 'flex-start'}}>Admission 2024-25</div>
+              <div className="section-label" style={{justifyContent: 'flex-start'}}>Admission {settings.current_session}</div>
               <h2 className="section-title" style={{textAlign: 'left'}}>How to Join <span>IMS Jammu?</span></h2>
               <p className="section-desc" style={{textAlign: 'left', maxWidth: 'none', marginBottom: '40px'}}>
                 We welcome students who want to learn and grow in the fields of Management and IT. Our admission process is very simple and easy for everyone.
@@ -133,7 +151,7 @@ export default function AdmissionsPage() {
               {/* Contact Help */}
               <div style={{marginTop: '50px', borderTop: '1px solid #eee', paddingTop: '30px'}}>
                 <p><strong>Need help with your application?</strong></p>
-                <p>Call us at: <a href="tel:+917006489200">+91 70064 89200</a> or Email: <a href="mailto:imsjammu93@gmail.com">imsjammu93@gmail.com</a></p>
+                <p>Call us at: <a href={`tel:${contactInfo.phoneRaw}`}>{contactInfo.phone}</a> or Email: <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a></p>
               </div>
             </div>
 

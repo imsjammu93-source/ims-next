@@ -1,6 +1,30 @@
-import React from 'react'
+'use client';
+import { useState, useEffect } from 'react';
+import { contactInfo } from '@/config/contactInfo'
 
 function Footer() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 600) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <>
     <footer id="footer" aria-label="Site Footer">
@@ -14,24 +38,23 @@ function Footer() {
           </div>
           <p>
             A pioneer private college established in 1997, located at
-            GurhaBrahamana (Patoli), Akhnoor Road, Jammu. Offering MBA, BBA
+            {contactInfo.address}. Offering MBA, BBA
             &amp; BCA under the Jamwal Group of Educational Institutions.
           </p>
           <ul className="footer-contact-list">
             <li>
-              <a href="tel:+917006489200">
-                <i className="fas fa-phone-alt" /> +91 70064 89200
+              <a href={`tel:${contactInfo.phoneRaw}`}>
+                <i className="fas fa-phone-alt" /> {contactInfo.phone}
               </a>
             </li>
             <li>
-              <a href="mailto:imsjammu93@gmail.com">
-                <i className="fas fa-envelope" /> imsjammu93@gmail.com
+              <a href={`mailto:${contactInfo.email}`}>
+                <i className="fas fa-envelope" /> {contactInfo.email}
               </a>
             </li>
             <li>
               <a href="#">
-                <i className="fas fa-map-marker-alt" /> GurhaBrahamana (Patoli),
-                Akhnoor Road, Jammu
+                <i className="fas fa-map-marker-alt" /> {contactInfo.address}
               </a>
             </li>
           </ul>
@@ -94,7 +117,7 @@ function Footer() {
           <div className="footer-title">Find Us</div>
           <div className="footer-map">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3354.516739365175!2d74.79381577566278!3d32.77855527366306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391e8608e000b313%3A0x98de0438c993bca1!2sInstitute%20of%20Management%20Sciences%20(IMS)%2C%20Jammu!5e0!3m2!1sen!2sin!4v1778155226915!5m2!1sen!2sin" 
+              src={contactInfo.mapEmbedUrl}
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
@@ -116,19 +139,19 @@ function Footer() {
           education. JGEI, Jammu.
         </p>
         <div className="footer-socials">
-          <a href="https://www.facebook.com/imscollegejammu" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <a href={contactInfo.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
             <i className="fab fa-facebook-f" />
           </a>
-          <a href="#" aria-label="Twitter/X">
+          <a href={contactInfo.socials.twitter} aria-label="Twitter/X">
             <i className="fab fa-x-twitter" />
           </a>
-          <a href="#" aria-label="Instagram">
+          <a href={contactInfo.socials.instagram} aria-label="Instagram">
             <i className="fab fa-instagram" />
           </a>
-          <a href="#" aria-label="YouTube">
+          <a href={contactInfo.socials.youtube} aria-label="YouTube">
             <i className="fab fa-youtube" />
           </a>
-          <a href="#" aria-label="LinkedIn">
+          <a href={contactInfo.socials.linkedin} aria-label="LinkedIn">
             <i className="fab fa-linkedin-in" />
           </a>
         </div>
@@ -138,7 +161,12 @@ function Footer() {
 </footer>
 
 
-<button id="back-to-top" aria-label="Back to top">
+<button 
+  id="back-to-top" 
+  className={isVisible ? 'visible' : ''} 
+  onClick={scrollToTop} 
+  aria-label="Back to top"
+>
   <i className="fas fa-chevron-up" />
 </button>
     </>

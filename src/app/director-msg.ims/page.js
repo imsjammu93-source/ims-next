@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '@/layoutComponents/Layout'
 import PageHeader from '@/layoutComponents/PageHeader'
 import '@/assets/css/leadership.css'
-
+import { assetsInfo } from '@/config/assetsInfo'
 export const metadata = {
   title: "Director's Message",
   description: "A message from the Director of IMS Jammu, focusing on innovation, tradition, and nurturing future global business leaders.",
@@ -14,7 +14,7 @@ function DirectorMessage() {
       <PageHeader
         title="Director's Message"
         subtitle="Cultivating a legacy of innovation and excellence in global management."
-        bgImage="https://images.unsplash.com/photo-1523050338691-c1e53d076efd?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.facultyMessagePageHeaderImg}
       />
 
       <main className="leadership-page">
@@ -23,7 +23,7 @@ function DirectorMessage() {
             {/* PORTRAIT SIDE */}
             <aside className="portrait-side">
               <div className="portrait-frame">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800" alt="Director Portrait" />
+                <img src={assetsInfo.directorImg} alt="Director Portrait" />
               </div>
               <div className="leader-meta">
                 <h3 className="leader-name">Prof. (Dr.) Meenakshi Sharma</h3>

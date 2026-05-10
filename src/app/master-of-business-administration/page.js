@@ -3,6 +3,7 @@ import Layout from '@/layoutComponents/Layout'
 import PageHeader from '@/layoutComponents/PageHeader'
 import QuickLinksCard from '@/components/QuickLinksCard'
 import '@/assets/css/programs.css'
+import { assetsInfo } from '@/config/assetsInfo'
 
 export const metadata = {
   title: "Master of Business Administration (MBA) | IMS Jammu",
@@ -15,7 +16,7 @@ function MBAProgramPage() {
       <PageHeader
         title="Master of Business Administration (MBA)"
         subtitle="Approved by AICTE and affiliated with the University of Jammu."
-        bgImage="https://images.unsplash.com/photo-1523240715632-d984bb4b9749?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.mbaPageHeaderImg}
       />
 
       <main className="program-page">
@@ -26,7 +27,7 @@ function MBAProgramPage() {
             <div className="program-main-content">
               
               <img 
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200" 
+                src={assetsInfo.mbaFlyerImg} 
                 alt="MBA Leadership at IMS" 
                 className="program-feature-img" 
               />

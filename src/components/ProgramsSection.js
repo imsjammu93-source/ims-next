@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-
+import { assetsInfo } from '@/config/assetsInfo';
 function ProgramsSection() {
   const programs = [
     {
@@ -10,7 +10,7 @@ function ProgramsSection() {
       fullName: "Master of Business Administration",
       desc: "Approved by AICTE and MHRD, Govt. of India. Affiliated with Jammu University. A 2-year postgraduate programme for future strategic business leaders.",
       features: ["AICTE Approved", "Management Quota", "60 Seats"],
-      image: "assets/images/hero2.jpg",
+      image: assetsInfo.mbaPageHeaderImg,
       link: "/master-of-business-administration",
       delay: 50
     },
@@ -20,7 +20,7 @@ function ProgramsSection() {
       fullName: "Bachelor of Business Administration",
       desc: "A 3-year professional degree programme affiliated with the University of Jammu, focusing on developing competent and socially sensitive global leaders.",
       features: ["Global Recognition", "Practical Training", "Seminars"],
-      image: "assets/images/gallery-library.jpg",
+      image: assetsInfo.bbaPageHeaderImg,
       link: "/bachelor-of-business-administration",
       delay: 120
     },
@@ -30,7 +30,7 @@ function ProgramsSection() {
       fullName: "Bachelor of Computer Applications",
       desc: "A 3-year technical programme recognised by J&K Govt. and affiliated with the University of Jammu, preparing graduates for the global IT industry.",
       features: ["24-Hr Internet", "Software Dev", "Modern Labs"],
-      image: "assets/images/gallery-tech.jpg",
+      image: assetsInfo.bcaPageHeaderImg,
       link: "/bachelor-of-computer-application",
       delay: 200
     }

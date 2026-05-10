@@ -1,0 +1,297 @@
+/* ========================================
+   BLOG DETAIL — PREMIUM EDITORIAL STYLE
+   IMS Jammu Institutional Blog
+   ======================================== */
+
+.blog-detail-page {
+    background: #ffffff;
+    padding-bottom: 100px;
+}
+
+/* ── ARTICLE HEADER (HERO) ──────────────── */
+.blog-detail-hero {
+    position: relative;
+    height: 550px;
+    background: var(--clr-navy-dark, #091831);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.blog-detail-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.blog-detail-hero__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+.blog-detail-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(9, 24, 49, 1) 0%, rgba(9, 24, 49, 0.4) 60%, transparent 100%);
+    z-index: 2;
+}
+
+.blog-detail-hero__content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    padding-bottom: 60px;
+}
+
+.blog-detail-cat {
+    display: inline-block;
+    padding: 6px 18px;
+    background: var(--clr-gold, #FF2D1E);
+    color: #ffffff;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+}
+
+.blog-detail-title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 25px;
+    max-width: 900px;
+}
+
+.blog-detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.blog-detail-meta span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.blog-detail-meta i {
+    color: var(--clr-gold, #FF2D1E);
+}
+
+/* ── LAYOUT ─────────────────────────── */
+.blog-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+    margin-top: -40px; /* Overlap with hero */
+    position: relative;
+    z-index: 10;
+}
+
+/* ── MAIN CONTENT ───────────────────── */
+.blog-main-article {
+    background: #ffffff;
+    padding: 60px;
+    border-radius: 30px;
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.1);
+}
+
+.blog-content-body {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: #334155;
+}
+
+.blog-content-body p {
+    margin-bottom: 25px;
+}
+
+.blog-content-body h2, 
+.blog-content-body h3 {
+    font-family: var(--font-heading);
+    color: var(--clr-navy, #1E355A);
+    margin: 45px 0 20px;
+    font-weight: 800;
+}
+
+.blog-content-body h2 { font-size: 1.85rem; }
+.blog-content-body h3 { font-size: 1.5rem; }
+
+.blog-content-body img {
+    border-radius: 20px;
+    margin: 40px 0;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.blog-content-body blockquote {
+    margin: 40px 0;
+    padding: 30px 40px;
+    background: #f8fafc;
+    border-left: 5px solid var(--clr-gold);
+    border-radius: 0 20px 20px 0;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--clr-navy);
+}
+
+/* ── AUTHOR BOX ─────────────────────── */
+.blog-author-card {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.author-avatar {
+    width: 80px;
+    height: 80px;
+    background: var(--clr-gold-pale, #fff0ef);
+    color: var(--clr-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.author-info h4 {
+    font-size: 1.25rem;
+    color: var(--clr-navy);
+    margin-bottom: 5px;
+}
+
+.author-info p {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ── SIDEBAR ─────────────────────────── */
+.blog-sidebar {
+    position: sticky;
+    top: 120px;
+    align-self: flex-start;
+}
+
+.sidebar-widget {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    border: 1px solid #f1f5f9;
+}
+
+.widget-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--clr-navy);
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--clr-gold-pale);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.widget-title i { color: var(--clr-gold); font-size: 1rem; }
+
+.related-post-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    transition: var(--transition, all 0.3s ease);
+}
+
+.related-post-item:last-child { margin-bottom: 0; }
+
+.related-thumb {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f1f5f9;
+    flex-shrink: 0;
+}
+
+.related-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.related-text h5 {
+    font-size: 0.95rem;
+    color: var(--clr-navy);
+    line-height: 1.4;
+    margin-bottom: 5px;
+    font-weight: 700;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-post-item:hover h5 {
+    color: var(--clr-gold);
+}
+
+.related-date {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+/* ── SHARE BUTTONS ──────────────────── */
+.share-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.share-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s;
+}
+
+.share-btn:hover {
+    background: var(--clr-navy);
+    color: #ffffff;
+    border-color: var(--clr-navy);
+    transform: translateY(-3px);
+}
+
+/* ── RESPONSIVE ─────────────────────── */
+@media (max-width: 1024px) {
+    .blog-detail-container {
+        grid-template-columns: 1fr;
+    }
+    .blog-detail-hero { height: 450px; }
+}
+
+@media (max-width: 768px) {
+    .blog-main-article { padding: 30px; }
+    .blog-detail-title { font-size: 2rem; }
+    .blog-detail-meta { gap: 15px; font-size: 0.8rem; }
+    .blog-detail-hero { height: 400px; }
+}

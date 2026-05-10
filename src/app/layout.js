@@ -3,6 +3,10 @@ import "swiper/css/bundle";
 import "../assets/css/styles.css";
 import Script from "next/script";
 import ClientScripts from "@/components/ClientScripts";
+import { contactInfo } from "@/config/contactInfo";
+import Providers from "@/components/Providers";
+import WhatsAppButton from "@/components/WhatsAppButton";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -19,7 +23,7 @@ export const metadata = {
     template: "%s | IMS Jammu",
   },
   description:
-    "Institute of Management Sciences (IMS), Jammu — a pioneer private college established in 1997, located at GurhaBrahamana, Akhnoor Road. Offering MBA, BBA, and BCA programmes with state-of-the-art infrastructure on a 25-acre campus.",
+    `Institute of Management Sciences (IMS), Jammu — a pioneer private college established in 1997, located at ${contactInfo.address}. Offering MBA, BBA, and BCA programmes with state-of-the-art infrastructure on a 25-acre campus.`,
   keywords: [
     "IMS Jammu",
     "Institute of Management Sciences Jammu",
@@ -46,13 +50,13 @@ export default function RootLayout({ children }) {
 
  </head>
       <body>
-        <ClientScripts />
-        {children}
-
-
-<Script src="/assets/js/main.js"  strategy="afterInteractive" />
-
-    </body>
+        <Providers>
+          <ClientScripts />
+          {children}
+          <WhatsAppButton />
+        </Providers>
+        <Script src="/assets/js/main.js" strategy="afterInteractive" />
+      </body>
     </html>
   );
 }

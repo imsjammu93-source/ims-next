@@ -1,71 +1,92 @@
-/* Leading Recruiters Page - Redesigned from Scratch */
-
-.recruiters-page {
-  background: var(--clr-white);
-  padding-bottom: 100px;
+.recruiters-main-col {
+  flex: 1;
+  min-width: 0;
 }
 
-/* Centered Header Section */
-.recruiters-header-box {
-  padding: 100px 0 60px;
-  text-align: center;
-  margin: 0 auto;
-}
-
-.recruiters-header-box .section-title {
-  margin-bottom: 30px;
-  text-align: center; /* Ensure title is centered */
-}
-
-.recruiters-header-box .section-desc {
-  margin: 0 auto;
-  text-align: center; /* Ensure paragraph is centered and aligned with title */
-  line-height: 1.8;
-  font-size: 1.15rem;
-}
-
-/* The Logo Wall - Seamless & Large */
-.recruiter-wall {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 Big Columns for impact */
-  gap: 2px; /* Minimal gap for a "wall" effect */
-  background: #f0f0f0; /* Color for the thin gaps */
-  border: 2px solid #f0f0f0;
-  margin: 50px 0;
-}
-
-.wall-item {
-  background: var(--clr-white);
-  aspect-ratio: 16 / 9;
+.recruiter-wide-showcase {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.recruiter-wide-item {
+  width: 100%;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  position: relative;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.4s ease;
+  background: var(--clr-white);
+  padding: 20px;
 }
 
-.wall-item img {
-  width: 80%; /* Logo takes up most of the space */
-  height: 80%;
+.recruiter-wide-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--clr-gold-light);
+}
+
+.recruiter-wide-item img {
+  width: 100%;
+  height: auto;
+  display: block;
   object-fit: contain;
-  transition: transform 0.5s ease;
 }
 
-.wall-item:hover img {
-  transform: scale(1.1);
+/* Sidebar CTA Card */
+.admission-sidebar-card {
+  margin-top: 30px;
+  background: var(--clr-navy-dark);
+  padding: 35px 30px;
+  border-radius: var(--radius-md);
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
 }
 
-.wall-item::after {
-  content: '';
+.admission-sidebar-card .card-accent {
   position: absolute;
-  inset: 0;
-  background: var(--clr-navy);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--grad-gold);
 }
 
-.wall-item:hover::after {
-  opacity: 0.03;
+.admission-sidebar-card h3 {
+  font-family: var(--font-heading);
+  color: var(--clr-gold);
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+.admission-sidebar-card p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 25px;
+}
+
+.btn-sidebar-gold {
+  background: var(--clr-gold);
+  color: var(--clr-navy-dark);
+  padding: 14px 28px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn-sidebar-gold:hover {
+  background: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-gold);
 }
 
 /* Big Stats Section */
@@ -73,7 +94,7 @@
   background: var(--clr-navy-dark);
   padding: 100px 0;
   color: var(--clr-white);
-  margin: 80px 0;
+  margin: 60px 0;
 }
 
 .modern-stats-grid {
@@ -112,9 +133,10 @@
   margin-bottom: 20px;
 }
 
-@media (max-width: 1024px) {
-  .recruiter-wall {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 1200px) {
+  .layout-with-sidebar {
+    grid-template-columns: 1fr;
+    gap: 50px;
   }
 }
 
@@ -128,9 +150,6 @@
 }
 
 @media (max-width: 480px) {
-  .recruiter-wall {
-    grid-template-columns: 1fr;
-  }
   .modern-stats-grid {
     grid-template-columns: 1fr;
   }

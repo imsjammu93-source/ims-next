@@ -232,25 +232,7 @@ const GalleryModule = (() => {
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && lightbox?.classList.contains('open')) closeLightbox(); });
 })();
 
-/* ============================================================
-   MODULE 7 — BACK TO TOP BUTTON
-   ============================================================ */
-const BackToTopModule = (() => {
-  const btn = $('#back-to-top');
-  if (!btn) return;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 600) {
-      btn.classList.add('visible');
-    } else {
-      btn.classList.remove('visible');
-    }
-  }, { passive: true });
-
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-})();
+// BackToTop functionality moved to Footer.js React component for Next.js navigation support
 
 /* ============================================================
    MODULE 8 — NEWSLETTER FORM (UI feedback)

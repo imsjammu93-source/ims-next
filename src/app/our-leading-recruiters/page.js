@@ -3,6 +3,7 @@ import Layout from '@/layoutComponents/Layout'
 import PageHeader from '@/layoutComponents/PageHeader'
 import '@/assets/css/recruiters.css'
 import QuickLinksCard from '@/components/QuickLinksCard'
+import { assetsInfo } from '@/config/assetsInfo'
 
 export const metadata = {
   title: "Our Leading Recruiters | IMS Jammu",
@@ -10,16 +11,10 @@ export const metadata = {
 }
 
 const recruiters = [
-  { name: "HDFC Bank", logo: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&q=80&w=600" },
-  { name: "ICICI Bank", logo: "https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?auto=format&fit=crop&q=80&w=600" },
-  { name: "Amazon", logo: "https://images.unsplash.com/photo-1523474253046-2cd2c788f3ff?auto=format&fit=crop&q=80&w=600" },
-  { name: "TCS", logo: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=600" },
-  { name: "Infosys", logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=600" },
-  { name: "Deloitte", logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=600" },
-  { name: "Wipro", logo: "https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&q=80&w=600" },
-  { name: "Capgemini", logo: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=600" },
-  { name: "Cognizant", logo: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=600" },
-];
+  { name: "HDFC Bank", logo: assetsInfo.requirterImg1 },
+  { name: "ICICI Bank", logo: assetsInfo.requirterImg2 },
+  { name: "Amazon", logo: assetsInfo.requirterImg3 },
+  ];
 
 function LeadingRecruiters() {
   return (
@@ -27,40 +22,51 @@ function LeadingRecruiters() {
       <PageHeader
         title="Our Leading Recruiters"
         subtitle="Where talent meets opportunity in the global marketplace."
-        bgImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.requirterPageHeader}
       />
 
       <main className="recruiters-page">
-        {/* CENTERED INTRODUCTION WITH SIDEBAR */}
-        <section className="container" style={{padding: '100px 0'}}>
-          <div className="layout-with-sidebar">
-            <div className="recruiters-header-box text-left" style={{textAlign: 'left', margin: '0', padding: '0', maxWidth: 'none'}}>
-              <div className="section-label" style={{justifyContent: 'flex-start'}}>Placement Excellence</div>
-              <h2 className="section-title" style={{textAlign: 'left'}}>A Preferred Destination for <span>Global Corporates</span></h2>
-              <p className="section-desc" style={{textAlign: 'left', maxWidth: 'none'}}>
-                For over two decades, the Institute of Management Sciences has served as a primary talent hub for the nation's most prestigious organizations. Our commitment to excellence in pedagogy and industry-readiness ensures that our graduates are equipped to lead in a globalized economy.
-              </p>
-              <p className="section-desc" style={{marginTop: '20px', textAlign: 'left', maxWidth: 'none'}}>
-                We take immense pride in our extensive network of recruitment partners who continue to place their trust in the competence and integrity of IMS alumni.
-              </p>
-            </div>
+        <section className="section" style={{padding: '80px 0'}}>
+          <div className="container">
+            <div className="layout-with-sidebar">
+              <div className="recruiters-main-col">
+                <div className="recruiters-intro">
+                  <div className="section-label" style={{justifyContent: 'flex-start'}}>Placement Excellence</div>
+                  <h2 className="section-title" style={{textAlign: 'left'}}>A Preferred Destination for <span>Global Corporates</span></h2>
+                  <p className="section-desc" style={{textAlign: 'left', maxWidth: 'none', marginBottom: '20px'}}>
+                    For over two decades, the Institute of Management Sciences has served as a primary talent hub for the nation's most prestigious organizations. Our commitment to excellence in pedagogy and industry-readiness ensures that our graduates are equipped to lead in a globalized economy.
+                  </p>
+                  <p className="section-desc" style={{textAlign: 'left', maxWidth: 'none', marginBottom: '40px'}}>
+                    We take immense pride in our extensive network of recruitment partners who continue to place their trust in the competence and integrity of IMS alumni.
+                  </p>
+                </div>
 
-            <aside className="sidebar">
-              <QuickLinksCard />
-            </aside>
+                {/* New Wide Showcase Layout */}
+                <div className="recruiter-wide-showcase">
+                  {recruiters.map((recruiter, index) => (
+                    <div key={index} className="recruiter-wide-item" data-aos="fade-up">
+                      <img src={recruiter.logo} alt={recruiter.name} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <aside className="sidebar">
+                <QuickLinksCard />
+                
+                {/* Admission CTA Sidebar Card */}
+                <div className="admission-sidebar-card">
+                  <div className="card-accent"></div>
+                  <h3>Apply for Admissions</h3>
+                  <p>Join the pioneer private institute of Jammu & Kashmir and shape your career with excellence.</p>
+                  <a href="/admissions" className="btn-sidebar-gold">
+                    Apply Now <i className="fas fa-arrow-right" style={{marginLeft: '8px'}} />
+                  </a>
+                </div>
+              </aside>
+            </div>
           </div>
         </section>
-
-        {/* LOGO WALL - SEAMLESS & LARGE */}
-        <div className="container">
-          <div className="recruiter-wall">
-            {recruiters.map((recruiter, index) => (
-              <div key={index} className="wall-item">
-                <img src={recruiter.logo} alt={recruiter.name} />
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* STATS SECTION */}
         <section className="modern-stats-banner">

@@ -14,7 +14,7 @@ function VisionPage() {
       <PageHeader
         title="Vision & Mission"
         subtitle="Our commitment to academic excellence, innovation, and social responsibility."
-        bgImage="/assets/images/campus.jpg"
+        bgImage="https://images.unsplash.com/photo-1476304884326-cd2c88572c5f?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />
 
       <main className="vision-mission-page">
@@ -23,7 +23,7 @@ function VisionPage() {
           <div className="container">
             <div className="vision-content-wrapper">
               <div className="vision-image-side">
-                <img src="/assets/images/vision-bg.png" alt="IMS Vision" />
+                <img src="/assets/images/vision-bg.jpg" alt="IMS Vision" />
               </div>
               <div className="vision-text-side">
                 <div className="section-label">Institutional Vision</div>
@@ -170,4 +170,4 @@ function VisionPage() {
   )
 }
 
-export default VisionPage
+export default VisionPage

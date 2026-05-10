@@ -9,13 +9,16 @@ export const metadata = {
   description: "Stay updated on the national and international conferences organized at the Institute of Management Sciences, Jammu.",
 }
 
+import { contactInfo } from '@/config/contactInfo'
+import { assetsInfo } from '@/config/assetsInfo'
+
 function ConferencePage() {
   return (
     <Layout>
       <PageHeader
         title="Conferences & Symposiums"
         subtitle="A platform for intellectual discourse and academic exploration."
-        bgImage="https://images.unsplash.com/photo-1540575861501-7c9110d79af1?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.confrensePageHeader}
       />
 
       <main className="conference-page">
@@ -42,13 +45,13 @@ function ConferencePage() {
               {/* Large Stacked Images */}
               <div className="event-gallery-stack">
                 <div className="event-image-item">
-                  <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&q=80&w=1200" alt="Conference Highlight 1" />
+                  <img src={assetsInfo.confrenseImg1} alt="Conference Highlight 1" />
                 </div>
                 <div className="event-image-item">
-                  <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&q=80&w=1200" alt="Conference Highlight 2" />
+                  <img src={assetsInfo.confrenseImg2} alt="Conference Highlight 2" />
                 </div>
                 <div className="event-image-item">
-                  <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&q=80&w=1200" alt="Conference Highlight 3" />
+                  <img src={assetsInfo.confrenseImg3} alt="Conference Highlight 3" />
                 </div>
               </div>
 
@@ -80,21 +83,21 @@ function ConferencePage() {
                   <i className="fas fa-envelope" />
                   <div>
                     <p>Conference Queries</p>
-                    <a href="mailto:imsjammu93@gmail.com">imsjammu93@gmail.com</a>
+                    <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
                   </div>
                 </div>
                 <div className="sc-item">
                   <i className="fas fa-phone-alt" />
                   <div>
                     <p>Institutional Office</p>
-                    <a href="tel:+917006489200">+91 70064 89200</a>
+                    <a href={`tel:${contactInfo.phoneRaw}`}>{contactInfo.phone}</a>
                   </div>
                 </div>
                 <div className="sc-item" style={{marginBottom: 0}}>
                   <i className="fas fa-map-marker-alt" />
                   <div>
                     <p>Location</p>
-                    <span>Gurha Brahmana (Patoli), Jammu</span>
+                    <span>{contactInfo.address}</span>
                   </div>
                 </div>
               </div>

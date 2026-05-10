@@ -4,6 +4,7 @@ import PageHeader from '@/layoutComponents/PageHeader'
 import '@/assets/css/jgei.css'
 
 import QuickLinksCard from '@/components/QuickLinksCard'
+import { assetsInfo } from '@/config/assetsInfo'
 
 export const metadata = {
   title: "Overview JGEI | Jamwal Group of Educational Institutions",
@@ -16,7 +17,7 @@ function OverviewJGEI() {
       <PageHeader
         title="Overview of JGEI"
         subtitle="Exploring the legacy and reach of the Jamwal Group of Educational Institutions."
-        bgImage="https://images.unsplash.com/photo-1541339907198-e08759dfc3ef?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.jgeiOverviewPageHeaderImg}
       />
 
       <main className="jgei-page">
@@ -52,31 +53,31 @@ function OverviewJGEI() {
           <div className="jgei-gallery-mosaic">
             {/* Building 1 */}
             <div className="mosaic-item mosaic-item--large">
-              <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1200" alt="JGEI Campus" />
+              <img src={assetsInfo.overviewTop1Img} alt="JGEI Campus" />
             </div>
             {/* People/Event 1 */}
             <div className="mosaic-item">
-              <img src="https://images.unsplash.com/photo-1523580494863-6f30312246d5?auto=format&fit=crop&q=80&w=800" alt="JGEI Event" />
+              <img src={assetsInfo.overviewTop2Img} alt="JGEI Event" />
             </div>
             {/* Building 2 */}
             <div className="mosaic-item">
-              <img src="https://images.unsplash.com/photo-1541339907198-e08759dfc3ef?auto=format&fit=crop&q=80&w=800" alt="JGEI Infrastructure" />
+              <img src={assetsInfo.overviewTop3Img} alt="JGEI Infrastructure" />
             </div>
             {/* Building 3 */}
             <div className="mosaic-item mosaic-item--wide">
-              <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=1000" alt="JGEI Facility" />
+              <img src={assetsInfo.overviewTop4Img} alt="JGEI Facility" />
             </div>
             {/* People/Event 2 */}
             <div className="mosaic-item">
-              <img src="https://images.unsplash.com/photo-1523240715639-963c71089ce0?auto=format&fit=crop&q=80&w=800" alt="Student Life" />
+              <img src={assetsInfo.overviewTop5Img} alt="Student Life" />
             </div>
             {/* Building 4 */}
             <div className="mosaic-item">
-              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800" alt="Academic Block" />
+              <img src={assetsInfo.overviewTop6Img} alt="Academic Block" />
             </div>
             {/* People/Event 3 */}
             <div className="mosaic-item">
-              <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800" alt="Workshop" />
+              <img src={assetsInfo.overviewTop7Img} alt="Workshop" />
             </div>
           </div>
         </section>

@@ -2,7 +2,7 @@ import React from 'react'
 import Layout from '@/layoutComponents/Layout'
 import PageHeader from '@/layoutComponents/PageHeader'
 import '@/assets/css/leadership.css'
-
+import { assetsInfo } from '@/config/assetsInfo'
 export const metadata = {
   title: "Chairman's Message",
   description: "A welcome message from the Chairman of Jamwal Group of Educational Institutions (JGEI) regarding our commitment to quality education.",
@@ -14,7 +14,7 @@ function ChairmanMessage() {
       <PageHeader
         title="Chairman's Message"
         subtitle="Guiding the next generation of leaders through value-based education."
-        bgImage="https://images.unsplash.com/photo-1541339907198-e08759dfc3ef?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.facultyMessagePageHeaderImg}
       />
 
       <main className="leadership-page">
@@ -23,7 +23,7 @@ function ChairmanMessage() {
             {/* PORTRAIT SIDE */}
             <aside className="portrait-side">
               <div className="portrait-frame">
-                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" alt="Chairman Portrait" />
+                <img src={assetsInfo.chairmanImg} alt="Chairman Portrait" />
               </div>
               <div className="leader-meta">
                 <h3 className="leader-name">Er. Vidhi S. Singh</h3>

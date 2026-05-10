@@ -14,36 +14,52 @@ import 'swiper/css/effect-fade';
 
 const heroSlides = [
   {
-    bg: "/assets/images/campus.jpg",
+    bg: "/assets/images/ims-slider1.jpg",
     badge: "Pioneer Private Institute — Est. 1997, Jammu",
-    title: <>Shaping <span className="highlight">Future Leaders</span><br />Through The Quality</>,
-    desc: "Institute of Management Sciences (IMS) - a premier college offering MBA, BBA & BCA programmes.",
+    title: <>Shaping <span className="highlight">Future Leaders</span><br />Through Academic Excellence</>,
+    desc: "Experience the grandeur of IMS Jammu, a premier institution dedicated to nurturing MBA, BBA & BCA professionals for over two decades.",
     cta1: { text: "Apply for Admission", link: "/admissions", icon: "fa-file-alt" },
-    cta2: { text: "Explore IMS", link: "/why-ims", icon: "fa-play-circle" }
+    cta2: { text: "Explore Campus", link: "/why-ims", icon: "fa-play-circle" }
   },
   {
-    bg: "/assets/images/slider2.jpg",
-    badge: "25-Acre Campus · Akhnoor Road, Jammu",
-    title: <>World-Class <span className="highlight">Campus & Labs</span><br />Built for 21st-Century Learning</>,
-    desc: "Our 14,000+ sq.m. campus features modern lecture halls with AV aids, an AC conference hall, computer centres with 24-hr internet.",
+    bg: "/assets/images/ims-slider2.jpg",
+    badge: "Advanced Learning Infrastructure",
+    title: <>World-Class <span className="highlight">Modern Labs</span><br />Built for Technical Mastery</>,
+    desc: "Empowering students with hands-on technical training in state-of-the-art computer centres and lecture halls designed for 21st-century learning.",
     cta1: { text: "Our Programmes", link: "/bachelor-of-computer-application", icon: "fa-graduation-cap" },
-    cta2: { text: "Why Choose IMS", link: "/why-ims", icon: "fa-info-circle" }
+    cta2: { text: "Research Facilities", link: "/why-ims", icon: "fa-microchip" }
   },
   {
-    bg: "/assets/images/slider3.jpg",
-    badge: "Values · Culture · Social Responsibility",
-    title: <>Education That Builds<br /><span className="highlight">Character & Values</span></>,
-    desc: "IMS is dedicated to promoting cultural, religious and moral values among youth through education and social activities.",
-    cta1: { text: "Upcoming Events", link: "/conference", icon: "fa-calendar-alt" },
-    cta2: { text: "Enquire Now", link: "/admissions", icon: "fa-user-edit" }
+    bg: "/assets/images/ims-slider3.jpg",
+    badge: "Distinguished Academic Mentorship",
+    title: <>Guided by <span className="highlight">Expert Faculty</span><br />Committed to Your Success</>,
+    desc: "Learn from the best. Our experienced faculty brings industry insights and academic rigor to help you navigate your professional journey.",
+    cta1: { text: "Meet Our Faculty", link: "/about-ims", icon: "fa-chalkboard-teacher" },
+    cta2: { text: "Academics", link: "/master-of-business-administration", icon: "fa-book-open" }
   },
   {
-    bg: "/assets/images/hero4.jpg",
-    badge: "Jamwal Group of Educational Institutions",
-    title: <>Excellence in<br /><span className="highlight">Management & Technology</span></>,
-    desc: "Under the vision of Er. Vidhi S. Singh, JGEI strives to equip students with the right values, attitudes, and capabilities.",
-    cta1: { text: "About JGEI Group", link: "/overview-ims", icon: "fa-user-tie" },
-    cta2: { text: "The IMS Advantage", link: "/why-ims", icon: "fa-award" }
+    bg: "/assets/images/ims-slider4.jpg",
+    badge: "Vibrant Campus Life",
+    title: <>Beyond <span className="highlight">Academics</span><br />Celebrate Every Milestone</>,
+    desc: "From cultural concerts to academic seminars, life at IMS Jammu is a journey of holistic development and unforgettable memories.",
+    cta1: { text: "Upcoming Events", link: "/news-events", icon: "fa-calendar-alt" },
+    cta2: { text: "Gallery", link: "/gallery", icon: "fa-images" }
+  },
+   {
+    bg: "/assets/images/ims-slider5.jpg",
+    badge: "Social Responsibility & Ethics",
+    title: <>Nurturing <span className="highlight">Values & Sustainability</span><br />For a Greener Tomorrow</>,
+    desc: "We believe in building character. Our students actively engage in social welfare and environmental initiatives to become responsible global citizens.",
+    cta1: { text: "Student Life", link: "/why-ims", icon: "fa-leaf" },
+    cta2: { text: "Our Vision", link: "/overview-ims", icon: "fa-eye" }
+  },
+   {
+    bg: "/assets/images/ims-slider6.jpg",
+    badge: "The IMS Jammu Family",
+    title: <>Stronger <span className="highlight">Together</span><br />Defining Professional Excellence</>,
+    desc: "Join a collaborative community where teachers and students work hand-in-hand to achieve prestigious placements and career success.",
+    cta1: { text: "Join Our Community", link: "/admissions", icon: "fa-users" },
+    cta2: { text: "Placement Success", link: "/our-leading-recruiters", icon: "fa-briefcase" }
   }
 ];
 

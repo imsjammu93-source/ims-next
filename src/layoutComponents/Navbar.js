@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
 import { usePathname } from 'next/navigation';
+import { contactInfo } from '@/config/contactInfo';
 
 export default function Navbar() {
   const pathname = usePathname() || '/';
@@ -13,32 +13,32 @@ export default function Navbar() {
     <div className="utility-bar__inner">
       {/* Contact Info */}
       <div className="utility-bar__contact">
-        <a href="tel:+917006489200" aria-label="Call us">
-          <i className="fas fa-phone-alt" /> +91 70064 89200
+        <a href={`tel:${contactInfo.phoneRaw}`} aria-label="Call us">
+          <i className="fas fa-phone-alt" /> {contactInfo.phone}
         </a>
-        <a href="mailto:imsjammu93@gmail.com" aria-label="Email us">
-          <i className="fas fa-envelope" /> imsjammu93@gmail.com
+        <a href={`mailto:${contactInfo.email}`} aria-label="Email us">
+          <i className="fas fa-envelope" /> {contactInfo.email}
         </a>
         <a href="#" aria-label="College location">
-          <i className="fas fa-map-marker-alt" /> Akhnoor Road, Jammu
+          <i className="fas fa-map-marker-alt" /> {contactInfo.address}
         </a>
       </div>
       {/* Right: Socials + Portal */}
       <div className="utility-bar__right">
         <div className="utility-socials">
-          <a href="https://www.facebook.com/imscollegejammu" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <a href={contactInfo.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
             <i className="fab fa-facebook-f" />
           </a>
-          <a href="#" aria-label="Twitter/X">
+          <a href={contactInfo.socials.twitter} aria-label="Twitter/X">
             <i className="fab fa-x-twitter" />
           </a>
-          <a href="#" aria-label="Instagram">
+          <a href={contactInfo.socials.instagram} aria-label="Instagram">
             <i className="fab fa-instagram" />
           </a>
-          <a href="#" aria-label="YouTube">
+          <a href={contactInfo.socials.youtube} aria-label="YouTube">
             <i className="fab fa-youtube" />
           </a>
-          <a href="#" aria-label="LinkedIn">
+          <a href={contactInfo.socials.linkedin} aria-label="LinkedIn">
             <i className="fab fa-linkedin-in" />
           </a>
         </div>
@@ -55,7 +55,7 @@ export default function Navbar() {
       {/* Logo */}
       <Link href="/" className="navbar__logo" aria-label="IMS Jammu Home">
         <div className="logo-emblem">
-          <img src="assets/images/Logo-IMS.png" alt="IMS Jammu" />
+          <img src="/assets/images/Logo-IMS.png" alt="IMS Jammu" />
         </div>
       </Link>
       {/* Desktop Nav */}
@@ -74,7 +74,7 @@ export default function Navbar() {
             <div className="mega-col mega-col--span-2">
               <div className="mega-featured-card">
                 <img
-                  src="/assets/images/campus.jpg"
+                  src="/assets/images/ims-slider1.jpg"
                   alt="IMS Jammu Campus"
                   loading="lazy"
                 />
@@ -148,7 +148,7 @@ export default function Navbar() {
                 </div>
               </Link>
 
-              <Link href="/history" className="mega-item">
+              {/* <Link href="/history" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-history" />
                 </div>
@@ -156,7 +156,7 @@ export default function Navbar() {
                   <h4>Our History</h4>
                   <p>25+ years of academic excellence</p>
                 </div>
-              </Link>
+              </Link> */}
 
               <Link href="/administration-ims" className="mega-item">
                 <div className="mega-item__icon">
@@ -179,15 +179,18 @@ export default function Navbar() {
             {/* Col 1: MBA */}
             <div className="mega-col">
               <div className="mega-col__title">Programs Offered</div>
-              <Link href="/master-of-business-administration" className="mega-item">
+             
+
+              <Link href="/bachelor-of-computer-application" className="mega-item">
                 <div className="mega-item__icon">
-                  <i className="fas fa-briefcase" />
+                  <i className="fas fa-laptop-code" />
                 </div>
                 <div className="mega-item__text">
-                  <h4>Master of Business Administration</h4>
-                  <p>2-year postgraduate management programme</p>
+                  <h4>Bachelor of Computer Applications</h4>
+                  <p>3-year undergraduate IT &amp; software degree</p>
                 </div>
-              </Link>
+              </Link> 
+              
                <Link href="/bachelor-of-business-administration" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-graduation-cap" />
@@ -197,13 +200,17 @@ export default function Navbar() {
                   <p>3-year undergraduate business degree</p>
                 </div>
               </Link>
-                <Link href="/bachelor-of-computer-application" className="mega-item">
+               
+
+
+
+               <Link href="/master-of-business-administration" className="mega-item">
                 <div className="mega-item__icon">
-                  <i className="fas fa-laptop-code" />
+                  <i className="fas fa-briefcase" />
                 </div>
                 <div className="mega-item__text">
-                  <h4>Bachelor of Computer Applications</h4>
-                  <p>3-year undergraduate IT &amp; software degree</p>
+                  <h4>Master of Business Administration</h4>
+                  <p>2-year postgraduate management programme</p>
                 </div>
               </Link>
             </div>
@@ -369,7 +376,7 @@ export default function Navbar() {
       {/* /navbar__nav */}
       {/* CTA */}
       <div className="navbar__actions">
-        <Link href="/apply-now" className="btn btn-primary" id="apply-now-btn">
+        <Link href="/admissions" className="btn btn-primary" id="apply-now-btn">
           <i className="fas fa-file-alt" /> Apply Now
         </Link>
       </div>

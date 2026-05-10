@@ -1,167 +1,277 @@
-/* Alumni Page Styles */
+/* Alumni & Placement Success Styles */
 
 .alumni-page {
-  background: var(--clr-white);
+  background: #f8fafc;
+  position: relative;
+  z-index: 20; /* Ensures content sits above PageHeader slant */
+  margin-top: -60px; /* Overlaps the header for a premium look */
 }
 
-.alumni-intro {
-  padding: 100px 0 60px;
-  text-align: center;
-  margin: 0 auto;
-}
-
-/* Spotlight Section */
-.spotlight-section {
-  padding: 80px 0;
-  background: var(--clr-off-white);
-}
-
-.spotlight-grid {
+/* Stats Highlights */
+.alumni-stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  margin-top: 50px;
+  gap: 30px;
+  margin-bottom: 60px;
+  position: relative;
 }
 
-.alumni-card {
+.alumni-stat-card {
   background: var(--clr-white);
+  padding: 40px 30px;
   border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition);
-  border-bottom: 4px solid transparent;
-}
-
-.alumni-card:hover {
-  transform: translateY(-10px);
-  border-bottom-color: var(--clr-gold);
-}
-
-.alumni-img {
-  height: 300px;
-  width: 100%;
-  overflow: hidden;
-}
-
-.alumni-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.alumni-info {
-  padding: 30px;
   text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  border-bottom: 5px solid var(--clr-gold);
+  transition: var(--transition);
 }
 
-.alumni-info h3 {
-  font-family: var(--font-heading);
-  font-size: 1.4rem;
-  margin-bottom: 5px;
-  color: var(--clr-navy);
+.alumni-stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
 }
 
-.alumni-batch {
-  font-size: 0.85rem;
+.stat-icon {
+  font-size: 2.2rem;
   color: var(--clr-gold);
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.alumni-stat-card h3 {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--clr-navy);
+  margin: 0;
+  line-height: 1;
+}
+
+.alumni-stat-card p {
+  color: var(--clr-muted);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 15px;
-  display: block;
+  font-size: 0.85rem;
+  margin-top: 10px;
+  letter-spacing: 0.05em;
 }
 
-.alumni-role {
-  font-size: 0.95rem;
-  color: var(--clr-text);
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-.alumni-quote {
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--clr-muted);
-  line-height: 1.6;
-}
-
-/* Benefits Section */
-.benefits-section {
-  padding: 100px 0;
-}
-
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.benefit-item {
-  text-align: center;
-  padding: 20px;
-}
-
-.benefit-icon {
-  width: 80px;
-  height: 80px;
-  background: var(--clr-gold-pale);
-  color: var(--clr-gold);
-  border-radius: 50%;
+/* Dashboard Controls */
+.alumni-controls {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  margin: 0 auto 25px;
-  transition: var(--transition);
+  gap: 30px;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  border: 1px solid #edf2f7;
+  margin-bottom: 30px;
 }
 
-.benefit-item:hover .benefit-icon {
-  background: var(--clr-gold);
-  color: var(--clr-white);
-  transform: rotateY(180deg);
+.alumni-tabs {
+  display: flex;
+  background: #f1f5f9;
+  padding: 6px;
+  border-radius: 10px;
+  gap: 5px;
 }
 
-.benefit-item h4 {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+.tab-btn {
+  padding: 10px 28px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  color: #64748b;
+}
+
+.tab-btn.active {
+  background: white;
   color: var(--clr-navy);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.benefit-item p {
-  font-size: 0.9rem;
-  color: var(--clr-muted);
-  line-height: 1.5;
+.alumni-search {
+  position: relative;
+  flex: 1;
+  max-width: 450px;
 }
 
-/* Registration CTA */
-.alumni-cta {
-  background: linear-gradient(135deg, var(--clr-navy-dark), var(--clr-navy));
-  padding: 100px 0;
-  color: var(--clr-white);
+.alumni-search i {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.alumni-search input {
+  width: 100%;
+  padding: 14px 20px 14px 50px;
+  border: 2px solid #f1f5f9;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+}
+
+.alumni-search input:focus {
+  border-color: var(--clr-gold);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.1);
+}
+
+/* Table Design */
+.alumni-table-container {
+  margin-bottom: 30px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f1f5f9;
+}
+
+.alumni-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.alumni-table th {
+  background: #f8fafc;
+  color: #64748b;
+  padding: 20px 25px;
+  text-align: left;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.alumni-table td {
+  padding: 22px 25px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.92rem;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.alumni-table tr:last-child td {
+  border-bottom: none;
+}
+
+.alumni-table tr:hover td {
+  background: #fdfdfd;
+}
+
+.stream-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.stream-tag.mba { background: #eff6ff; color: #2563eb; }
+.stream-tag.bba { background: #faf5ff; color: #9333ea; }
+.stream-tag.bca { background: #f0fdf4; color: #16a34a; }
+
+.org-name {
+  color: var(--clr-navy);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.s-no {
+  color: #94a3b8;
+  font-weight: 600;
+  font-family: var(--font-body);
+}
+
+.no-results {
   text-align: center;
+  padding: 100px 0;
+  color: #64748b;
 }
 
-.alumni-cta h2 {
-  font-size: 2.8rem;
-  margin-bottom: 25px;
+.no-results i {
+  color: #cbd5e1;
+  margin-bottom: 20px;
 }
 
-@media (max-width: 992px) {
-  .spotlight-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* Recruiter Logos / Marquee placeholder */
+.recruiter-marquee {
+  background: white;
+  padding: 40px 0;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 40px;
+}
+
+.marquee-title {
+  text-align: center;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 0.2em;
+  margin-bottom: 30px;
+}
+
+.marquee-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  opacity: 0.5;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.marquee-grid:hover {
+  opacity: 0.8;
+  filter: grayscale(0%);
+}
+
+.marquee-item img {
+  height: 40px;
+  object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+  .alumni-controls {
+    flex-direction: column;
+    align-items: stretch;
   }
-  .benefits-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .alumni-search {
+    max-width: none;
   }
 }
 
-@media (max-width: 600px) {
-  .spotlight-grid, .benefits-grid {
+@media (max-width: 768px) {
+  .alumni-stats-grid {
     grid-template-columns: 1fr;
   }
-  .alumni-cta h2 {
-    font-size: 2rem;
+  .alumni-table-container {
+    overflow-x: auto;
+  }
+  .alumni-table {
+    min-width: 900px;
+  }
+  .alumni-tabs {
+    overflow-x: auto;
+  }
+  .tab-btn {
+    flex-shrink: 0;
   }
 }

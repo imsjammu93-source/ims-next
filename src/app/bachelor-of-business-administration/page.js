@@ -3,6 +3,7 @@ import Layout from '@/layoutComponents/Layout'
 import PageHeader from '@/layoutComponents/PageHeader'
 import QuickLinksCard from '@/components/QuickLinksCard'
 import '@/assets/css/programs.css'
+import { assetsInfo } from '@/config/assetsInfo'
 
 export const metadata = {
   title: "Bachelor of Business Administration (BBA) | IMS Jammu",
@@ -15,7 +16,7 @@ function BBAProgramPage() {
       <PageHeader
         title="Bachelor of Business Administration (BBA)"
         subtitle="Developing competent and socially sensitive leaders committed to excellence."
-        bgImage="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1920"
+        bgImage={assetsInfo.bbaPageHeaderImg}
       />
 
       <main className="program-page">
@@ -26,7 +27,7 @@ function BBAProgramPage() {
             <div className="program-main-content">
               
               <img 
-                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&q=80&w=1200" 
+                src={assetsInfo.bbaFlyerImg} 
                 alt="Business Education at IMS" 
                 className="program-feature-img" 
               />

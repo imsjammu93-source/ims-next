@@ -3,40 +3,61 @@ import React, { useState, useEffect } from 'react';
 import Layout from '@/layoutComponents/Layout';
 import PageHeader from '@/layoutComponents/PageHeader';
 import QuickLinksCard from '@/components/QuickLinksCard';
+import { assetsInfo } from '@/config/assetsInfo';
 
 const newsClippings = [
-  { src: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=800", title: "IMS Jammu Excellence Award 2024", type: "tall" },
-  { src: "https://images.unsplash.com/photo-1585829365234-784c05699500?auto=format&fit=crop&q=80&w=800", title: "Placement Drive Success in Daily Excelsior", type: "wide" },
-  { src: "https://images.unsplash.com/photo-1566378246598-5b11a0d486cc?auto=format&fit=crop&q=80&w=800", title: "National Conference on Management", type: "small" },
-  { src: "https://images.unsplash.com/photo-1504113888839-1c89b0233b44?auto=format&fit=crop&q=80&w=800", title: "Alumni Meet Highlighted in News", type: "large" },
-  { src: "https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&q=80&w=800", title: "IMS Ranked Top Institute in Region", type: "wide" },
-  { src: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=800", title: "Convocation Ceremony Coverage", type: "tall" },
-  { src: "https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&q=80&w=800", title: "New IT Lab Inauguration", type: "small" },
-  { src: "https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&q=80&w=800", title: "Social Initiative by IMS Students", type: "wide" },
-  { src: "https://images.unsplash.com/photo-1512428559083-a401c338e4a7?auto=format&fit=crop&q=80&w=800", title: "Sports Week Media Highlights", type: "small" },
-  { src: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=800", title: "Library Expansion Feature", type: "tall" },
+  { src: assetsInfo.newsImg1, title: "IMS Jammu Excellence Award 2024", type: "tall" },
+  { src: assetsInfo.newsImg2, title: "Placement Drive Success in Daily Excelsior", type: "wide" },
+  { src: assetsInfo.newsImg3, title: "National Conference on Management", type: "small" },
+  { src: assetsInfo.newsImg4, title: "Alumni Meet Highlighted in News", type: "large" },
+  { src: assetsInfo.newsImg5, title: "IMS Ranked Top Institute in Region", type: "wide" },
+  { src: assetsInfo.newsImg6, title: "Convocation Ceremony Coverage", type: "tall" },
+  { src: assetsInfo.newsImg7, title: "New IT Lab Inauguration", type: "small" },
+  { src: assetsInfo.newsImg8, title: "Social Initiative by IMS Students", type: "wide" },
+  { src: assetsInfo.newsImg9, title: "Sports Week Media Highlights", type: "small" },
+  { src: assetsInfo.newsImg10, title: "Library Expansion Feature", type: "tall" },
 ];
 
 function ImsInNewsPage() {
   const [selectedNewsIndex, setSelectedNewsIndex] = useState(null);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
   const openLightbox = (index) => {
     setSelectedNewsIndex(index);
+    setIsZoomed(false);
+    setMousePos({ x: 50, y: 50 });
     document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
     setSelectedNewsIndex(null);
+    setIsZoomed(false);
     document.body.style.overflow = 'auto';
+  };
+
+  const toggleZoom = (e) => {
+    e.stopPropagation();
+    setIsZoomed(!isZoomed);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isZoomed) return;
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setMousePos({ x, y });
   };
 
   const showNext = (e) => {
     e.stopPropagation();
+    setIsZoomed(false);
     setSelectedNewsIndex((prev) => (prev + 1) % newsClippings.length);
   };
 
   const showPrev = (e) => {
     e.stopPropagation();
+    setIsZoomed(false);
     setSelectedNewsIndex((prev) => (prev - 1 + newsClippings.length) % newsClippings.length);
   };
 
@@ -55,6 +76,7 @@ function ImsInNewsPage() {
     <Layout>
       <PageHeader 
         title="IMS In News" 
+        bgImage={assetsInfo.newsPageHeaderImg}
         subtitle="Archived media coverage and press clippings showcasing the journey of IMS Jammu"
       />
 
@@ -111,17 +133,39 @@ function ImsInNewsPage() {
 
       {/* Lightbox */}
       {selectedNewsIndex !== null && (
-        <div className="custom-lightbox active" onClick={closeLightbox}>
+        <div className={`custom-lightbox active ${isZoomed ? 'zoomed-mode' : ''}`} onClick={closeLightbox}>
           <button className="lightbox-nav-btn prev" onClick={showPrev}>
             <i className="fas fa-chevron-left" />
           </button>
+          
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <img src={newsClippings[selectedNewsIndex].src} alt={newsClippings[selectedNewsIndex].title} className="lightbox-img" />
-            <div className="lightbox-caption">
-              {newsClippings[selectedNewsIndex].title}
-              <span className="lightbox-counter">{selectedNewsIndex + 1} / {newsClippings.length}</span>
+            <div 
+              className={`lightbox-img-container ${isZoomed ? 'zoomed' : ''}`} 
+              onClick={toggleZoom}
+              onMouseMove={handleMouseMove}
+            >
+              <img 
+                src={newsClippings[selectedNewsIndex].src} 
+                alt={newsClippings[selectedNewsIndex].title} 
+                className="lightbox-img" 
+                style={isZoomed ? { 
+                  transformOrigin: `${mousePos.x}% ${mousePos.y}%`,
+                  transform: 'scale(2.5)' 
+                } : {}}
+              />
+            </div>
+            {!isZoomed && (
+              <div className="lightbox-caption">
+                {newsClippings[selectedNewsIndex].title}
+                <span className="lightbox-counter">{selectedNewsIndex + 1} / {newsClippings.length}</span>
+              </div>
+            )}
+            <div className="zoom-hint">
+              <i className={`fas ${isZoomed ? 'fa-search-minus' : 'fa-search-plus'}`} />
+              {isZoomed ? ' Click to Zoom Out' : ' Click to Zoom In'}
             </div>
           </div>
+
           <button className="lightbox-nav-btn next" onClick={showNext}>
             <i className="fas fa-chevron-right" />
           </button>
@@ -161,38 +205,42 @@ function ImsInNewsPage() {
 
         .news-press-wall {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-          grid-auto-rows: 240px;
-          grid-auto-flow: dense;
-          gap: 20px;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          grid-auto-rows: 400px;
+          gap: 25px;
         }
 
         .press-clipping {
           position: relative;
           border-radius: 8px;
           overflow: hidden;
-          background: #f0f0f0;
+          background: #f4f4f4;
           cursor: pointer;
           box-shadow: 0 4px 12px rgba(0,0,0,0.05);
           transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-          border: 1px solid rgba(0,0,0,0.03);
+          border: 1px solid rgba(0,0,0,0.08);
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
-        .press-clipping.wide { grid-column: span 2; }
-        .press-clipping.tall { grid-row: span 2; }
-        .press-clipping.large { grid-column: span 2; grid-row: span 2; }
+        .press-clipping.wide, .press-clipping.tall, .press-clipping.large {
+          grid-column: auto;
+          grid-row: auto;
+        }
 
         .press-clipping img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
+          padding: 15px;
           filter: grayscale(100%) sepia(20%) contrast(1.1);
           transition: all 0.6s ease;
         }
 
         .press-clipping:hover img {
           filter: grayscale(0%) sepia(0%) contrast(1);
-          transform: scale(1.04);
+          transform: scale(1.02);
         }
 
         .clipping-overlay {
@@ -313,6 +361,66 @@ function ImsInNewsPage() {
           transform: translateY(-3px);
         }
 
+        /* Zoom Functionality - Amazon Style Lens Zoom */
+        .lightbox-img-container {
+          cursor: zoom-in;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 90vw;
+          height: 80vh;
+          overflow: hidden; /* Essential for lens effect */
+          background: #000;
+          border-radius: 8px;
+          position: relative;
+        }
+
+        .lightbox-img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+          transition: transform 0.1s ease-out; /* Smooth follow effect */
+          will-change: transform, transform-origin;
+        }
+
+        .lightbox-img-container.zoomed {
+          cursor: zoom-out;
+        }
+
+        .lightbox-img-container.zoomed .lightbox-img {
+          /* Scale and origin are handled via inline styles in React */
+          max-width: none;
+          max-height: none;
+          width: 100%;
+          height: 100%;
+        }
+
+        .zoom-hint {
+          position: fixed;
+          bottom: 30px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--clr-gold);
+          color: #081D37;
+          padding: 10px 25px;
+          border-radius: 50px;
+          font-size: 0.9rem;
+          font-weight: 800;
+          pointer-events: none;
+          z-index: 1000;
+          box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          transition: all 0.3s ease;
+          border: 2px solid white;
+        }
+
+        .custom-lightbox.zoomed-mode .zoom-hint {
+          background: white;
+          color: var(--clr-navy);
+        }
+
         @media (max-width: 992px) {
           .news-layout-wrapper {
             flex-direction: column;
@@ -322,6 +430,9 @@ function ImsInNewsPage() {
           }
           .sticky-wrapper {
             position: static;
+          }
+          .lightbox-img-container.zoomed {
+            transform: scale(1.4);
           }
         }
       `}</style>
