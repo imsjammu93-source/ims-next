@@ -148,6 +148,7 @@ function Footer() {
           <a href={contactInfo.socials.instagram} aria-label="Instagram">
             <i className="fab fa-instagram" />
           </a>
+       
           <a href={contactInfo.socials.youtube} aria-label="YouTube">
             <i className="fab fa-youtube" />
           </a>

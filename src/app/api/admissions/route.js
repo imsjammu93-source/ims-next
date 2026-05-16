@@ -17,7 +17,7 @@ export async function POST(req) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
     });
-    
+   
     if (!dbRes.ok) {
       throw new Error(`PHP API responded with status: ${dbRes.status}`);
     }

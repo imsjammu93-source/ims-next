@@ -9,8 +9,8 @@ export default function WhatsAppButton() {
 
   if (isAdmin) return null;
 
-  const whatsappNumber = contactInfo.phoneRaw.replace('+', '');
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello! I am interested in IMS Jammu admissions.`;
+  const whatsappNumber = contactInfo.whatsapp;
+  const whatsappUrl = `${whatsappNumber}?text=Hello! I am interested in IMS Jammu admissions.`;
 
   return (
     <a 

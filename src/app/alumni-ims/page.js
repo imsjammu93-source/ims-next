@@ -6,6 +6,24 @@ import QuickLinksCard from '@/components/QuickLinksCard';
 import '@/assets/css/alumni.css';
 import { assetsInfo } from '@/config/assetsInfo';
 
+const starPlacements = [
+  { name: "Akash Razdan", company: "Certinova Pvt Ltd", fileName: "Akash Razdan - Certinova Pvt Ltd_.jpg" },
+  { name: "Akriti Raina", company: "pie Infocomm", fileName: "Akriti Raina-pie Infocomm.jpg" },
+  { name: "Akshay Kumar", company: "Jindal Steel Ltd", fileName: "Akshay Kumar-Jindal Steel Ltd.jpg" },
+  { name: "Ankit Gupta", company: "Zomato", fileName: "Ankit Gupta-Zomato.jpg" },
+  { name: "Ankit Raina", company: "Investosure", fileName: "Ankit Raina-Investosure.jpg" },
+  { name: "Anmol Mahajan", company: "Investosure", fileName: "Anmol Mahajan- Investosure.jpg" },
+  { name: "Aryan Bandral", company: "Takeone Network", fileName: "Aryan Bandral- Takeone Network_.jpg" },
+  { name: "Depika Handoo", company: "Genpact", fileName: "Depika Handoo-Genpact.jpg" },
+  { name: "Diksha Tickoo", company: "Bharti Axa Life Insurance", fileName: "Diksha Tickoo-Bharti Axa Life Insurance.jpg" },
+  { name: "Divyansh Pratap Singh", company: "ICICI Prudential", fileName: "Divyansh Pratap Singh-ICICI Prudential.jpg" },
+  { name: "Eshant Raina", company: "Certinova Pvt Ltd", fileName: "Eshant Raina - Certinova Pvt Ltd_.jpg" },
+  { name: "Himani Gupta", company: "SHRIRAM Gen. Insurance", fileName: "Himani Gupta-SHRIRAM Gen. Insurance.jpg" },
+  { name: "Justina Victor", company: "ICICI Bank", fileName: "Justina Victor-ICICI Bank.jpg" },
+  { name: "Karan Koul", company: "Anandrathi", fileName: "Karan Koul- Anandrathi.jpg" },
+  { name: "Lovish Thakur", company: "SHRIRAM Gen. Insurance", fileName: "Lovish Thakur-SHRIRAM Gen, Insurance.jpg" },
+];
+
 const placementData = [
   { name: "SALMAN SHEIKH", batch: "2007-2010", stream: "BBA", designation: "BUSINESS BANKING", organisation: "EMIRATES ISLAMIC BANK – UAE" },
   { name: "ANKUSH", batch: "2008-2010", stream: "MBA", designation: "TEAM MANAGER", organisation: "AMAZON" },
@@ -112,6 +130,37 @@ function AlumniPage() {
                   <div className="stat-icon"><i className="fas fa-trophy" /></div>
                   <h3>90%</h3>
                   <p>Placement Record</p>
+                </div>
+              </div>
+
+              {/* ── STAR PLACEMENTS SHOWCASE ── */}
+              <div className="star-placements-section">
+                <div className="star-placements-header">
+                  <div className="section-label">Our Pride</div>
+                  <h2 className="section-title">Star <span>Placements</span></h2>
+                  <p className="star-placements-sub">Meet the IMS alumni who are shaping the future at India&apos;s most respected companies.</p>
+                </div>
+
+                <div className="star-placements-grid">
+                  {starPlacements.map((student, idx) => (
+                    <div className="placement-card" key={idx}>
+                      <div className="placement-card__img-wrap">
+                        <img
+                          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/media/placements/${student.fileName}`}
+                          alt={student.name}
+                          className="placement-card__img"
+                        />
+                      </div>
+                      <div className="placement-card__body">
+                        <h4 className="placement-card__name">{student.name}</h4>
+                        <div className="placement-card__company">
+                          <i className="fas fa-building" />
+                          <span>{student.company}</span>
+                        </div>
+                      </div>
+                      <div className="placement-card__shine" />
+                    </div>
+                  ))}
                 </div>
               </div>
 

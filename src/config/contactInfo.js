@@ -1,6 +1,7 @@
 export const contactInfo = {
   phone: "+91 70064 89200",
   phoneRaw: "+917006489200",
+  whatsapp: "https://wa.me/919103789081",
   email: "imsjammu93@gmail.com",
   address: "GurhaBrahamana (Patoli), Akhnoor Road, Jammu",
   fullAddress: "GurhaBrahamana (Patoli), Akhnoor Road, Jammu, J&K - 181206",
