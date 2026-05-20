@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { assetsInfo } from '@/config/assetsInfo'
 function PrincipleMessage() {
   return (
     <section
@@ -13,7 +13,7 @@ function PrincipleMessage() {
       <div className="principal-img-wrap" data-aos="fade-right">
         <div className="principal-img-frame">
           <img
-            src="assets/images/chair.png"
+            src={assetsInfo.chairmanImg}
             alt="Er. Vidhi S. Singh, Chairman, JGEI"
             loading="lazy"
           />

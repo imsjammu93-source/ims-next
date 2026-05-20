@@ -1,10 +1,35 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { contactInfo } from '@/config/contactInfo';
+import { assetsInfo } from '@/config/assetsInfo';
 
 export default function Navbar() {
   const pathname = usePathname() || '/';
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeAccordion, setActiveAccordion] = useState(null); // 'about', 'academics', 'placements', 'more'
+
+  const toggleAccordion = (name) => {
+    setActiveAccordion(prev => prev === name ? null : name);
+  };
+
+  const closeSidebar = () => {
+    setIsOpen(false);
+    setActiveAccordion(null);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   return (
    
     <>
@@ -74,7 +99,7 @@ export default function Navbar() {
             <div className="mega-col mega-col--span-2">
               <div className="mega-featured-card">
                 <img
-                  src="/assets/images/ims-slider1.jpg"
+                  src={assetsInfo.slider1}
                   alt="IMS Jammu Campus"
                   loading="lazy"
                 />
@@ -377,15 +402,16 @@ export default function Navbar() {
       {/* CTA */}
       <div className="navbar__actions">
         <Link href="/admissions" className="btn btn-primary" id="apply-now-btn">
-          <i className="fas fa-file-alt" /> Apply Now
+         Apply Now
         </Link>
       </div>
       {/* Hamburger */}
       <button
-        className="hamburger"
+        className={`hamburger ${isOpen ? 'active' : ''}`}
         id="hamburger"
         aria-label="Open menu"
-        aria-expanded="false"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
       >
         <span />
         <span />
@@ -395,61 +421,183 @@ export default function Navbar() {
   </div>
 </nav>
 
-<div id="sidebar-overlay" className="sidebar-overlay" aria-hidden="true" />
-<aside id="mobile-sidebar" aria-label="Mobile Navigation" role="dialog">
+<div 
+  id="sidebar-overlay" 
+  className={`sidebar-overlay ${isOpen ? 'active' : ''}`} 
+  aria-hidden="true" 
+  onClick={closeSidebar}
+/>
+<aside 
+  id="mobile-sidebar" 
+  className={isOpen ? 'open' : ''} 
+  aria-label="Mobile Navigation" 
+  role="dialog"
+>
   <div className="sidebar-header">
-    <div className="navbar__logo">
-      <div className="logo-emblem">IMS</div>
-      <div className="logo-text">
-        <div className="logo-text__name">IMS Jammu</div>
-        <div className="logo-text__tagline">Akhnoor Road, Jammu</div>
+    <div className="sidebar-brand-wrapper">
+      <div className="sidebar-logo-container">
+        <img src="/assets/images/Logo-IMS.png" alt="IMS Jammu" />
+      </div>
+      <div className="sidebar-brand-text">
+        <div className="sidebar-brand-title">IMS Jammu</div>
+        <div className="sidebar-brand-subtitle">Akhnoor Road, Jammu</div>
       </div>
     </div>
     <button
       className="sidebar-close"
       id="sidebar-close"
       aria-label="Close menu"
+      onClick={closeSidebar}
     >
       <i className="fas fa-times" />
     </button>
   </div>
-  <nav className="sidebar-nav" role="navigation">
-    <Link href="/">
+  <nav className="sidebar-nav" role="navigation" style={{ paddingBottom: '40px' }}>
+    {/* 1. Home */}
+    <Link href="/" onClick={closeSidebar}>
       <i className="fas fa-home" /> Home
     </Link>
-    <Link href="/why-ims">
-      <i className="fas fa-star" /> Why Choose Us
+
+    {/* 2. About Us Accordion */}
+    <button 
+      type="button" 
+      className={`sidebar-accordion-btn ${activeAccordion === 'about' ? 'active' : ''}`}
+      onClick={() => toggleAccordion('about')}
+    >
+      <span><i className="fas fa-info-circle" style={{ color: 'var(--clr-gold)', marginRight: '12px', width: '18px' }} />About IMS</span>
+      <i className="fas fa-chevron-down" />
+    </button>
+    <div className={`sidebar-accordion-content ${activeAccordion === 'about' ? 'open' : ''}`}>
+      <Link href="/about-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+        About Institute
+      </Link>
+      <Link href="/overview-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Overview JGEI
+      </Link>
+      <Link href="/chairman-msg.ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Chairman's Message
+      </Link>
+      <Link href="/director-msg.ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Director's Message
+      </Link>
+      <Link href="/vision-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Vision &amp; Mission
+      </Link>
+      <Link href="/why-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Why Choose IMS?
+      </Link>
+      <Link href="/administration-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Administration
+      </Link>
+    </div>
+
+    {/* 3. Academic Programs Accordion */}
+    <button 
+      type="button" 
+      className={`sidebar-accordion-btn ${activeAccordion === 'academics' ? 'active' : ''}`}
+      onClick={() => toggleAccordion('academics')}
+    >
+      <span><i className="fas fa-graduation-cap" style={{ color: 'var(--clr-gold)', marginRight: '12px', width: '18px' }} />Academic Programs</span>
+      <i className="fas fa-chevron-down" />
+    </button>
+    <div className={`sidebar-accordion-content ${activeAccordion === 'academics' ? 'open' : ''}`}>
+      <Link href="/bachelor-of-computer-application" className="sidebar-accordion-link" onClick={closeSidebar}>
+        BCA (3-Year Degree)
+      </Link>
+      <Link href="/bachelor-of-business-administration" className="sidebar-accordion-link" onClick={closeSidebar}>
+        BBA (3-Year Degree)
+      </Link>
+      <Link href="/master-of-business-administration" className="sidebar-accordion-link" onClick={closeSidebar}>
+        MBA (2-Year Degree)
+      </Link>
+    </div>
+
+    {/* 4. Training & Placements Accordion */}
+    <button 
+      type="button" 
+      className={`sidebar-accordion-btn ${activeAccordion === 'placements' ? 'active' : ''}`}
+      onClick={() => toggleAccordion('placements')}
+    >
+      <span><i className="fas fa-briefcase" style={{ color: 'var(--clr-gold)', marginRight: '12px', width: '18px' }} />Placements</span>
+      <i className="fas fa-chevron-down" />
+    </button>
+    <div className={`sidebar-accordion-content ${activeAccordion === 'placements' ? 'open' : ''}`}>
+      <Link href="/training-placement-cell-message" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Training &amp; Placement Cell
+      </Link>
+      <Link href="/our-leading-recruiters" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Leading Recruiters
+      </Link>
+      <Link href="/alumni-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Alumni Network
+      </Link>
+    </div>
+
+    {/* 5. More Highlights Accordion */}
+    <button 
+      type="button" 
+      className={`sidebar-accordion-btn ${activeAccordion === 'more' ? 'active' : ''}`}
+      onClick={() => toggleAccordion('more')}
+    >
+      <span><i className="fas fa-network-wired" style={{ color: 'var(--clr-gold)', marginRight: '12px', width: '18px' }} />Institutional News</span>
+      <i className="fas fa-chevron-down" />
+    </button>
+    <div className={`sidebar-accordion-content ${activeAccordion === 'more' ? 'open' : ''}`}>
+      <Link href="/conference" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Conferences &amp; Events
+      </Link>
+      <Link href="/faculty-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+        Faculty Directory
+      </Link>
+      <Link href="/ims-in-news" className="sidebar-accordion-link" onClick={closeSidebar}>
+        IMS in News
+      </Link>
+    </div>
+
+    {/* 6. Blogs */}
+    <Link href="/blogs" onClick={closeSidebar}>
+      <i className="fas fa-newspaper" /> Blogs
     </Link>
-    <Link href="/chairman-msg.ims">
-      <i className="fas fa-user-tie" /> Chairman's Message
+
+    {/* 7. Campus Life */}
+    <Link href="/campus-life-ims" onClick={closeSidebar}>
+      <i className="fas fa-images" /> Campus Life
     </Link>
-    <Link href="/director-msg.ims">
-      <i className="fas fa-chalkboard-teacher" /> Director's Message
+
+    {/* 8. News & Events */}
+    <Link href="/news-events" onClick={closeSidebar}>
+      <i className="fas fa-calendar-alt" /> News &amp; Events
     </Link>
-    <Link href="/gallery">
-      <i className="fas fa-images" /> Gallery
+
+    {/* 9. Admissions */}
+    <Link href="/admissions" onClick={closeSidebar}>
+      <i className="fas fa-user-graduate" /> Admissions
     </Link>
-    <Link href="/news-events">
-      <i className="fas fa-newspaper" /> News &amp; Events
+
+    {/* 10. Contact */}
+    <Link href="/contact" onClick={closeSidebar}>
+      <i className="fas fa-map-marker-alt" /> Contact Us
     </Link>
-    <Link href="/contact">
-      <i className="fas fa-map-marker-alt" /> Contact
-    </Link>
+
+    {/* Apply Now Gold Action */}
     <Link
-      href="/apply-now"
+      href="/admissions"
+      onClick={closeSidebar}
       style={{
-        marginTop: 12,
+        marginTop: 18,
         background: "var(--grad-gold)",
         color: "var(--clr-navy-dark)",
-        borderRadius: 8
+        borderRadius: 8,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        boxShadow: 'var(--shadow-gold)'
       }}
     >
-      <i className="fas fa-file-alt" /> Apply Now
+      Apply Now
     </Link>
   </nav>
 </aside>
-
-
     </>
   )
 }

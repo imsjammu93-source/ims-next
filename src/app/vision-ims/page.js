@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '@/layoutComponents/Layout'
 import PageHeader from '@/layoutComponents/PageHeader'
 import '@/assets/css/vision-mission.css'
+import { assetsInfo } from '@/config/assetsInfo'
 
 export const metadata = {
   title: "Vision & Mission",
@@ -23,7 +24,7 @@ function VisionPage() {
           <div className="container">
             <div className="vision-content-wrapper">
               <div className="vision-image-side">
-                <img src="/assets/images/vision-bg.jpg" alt="IMS Vision" />
+                <img src={assetsInfo.visionImg} alt="IMS Vision" />
               </div>
               <div className="vision-text-side">
                 <div className="section-label">Institutional Vision</div>

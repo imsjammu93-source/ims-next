@@ -26,6 +26,7 @@ const navItems = [
       { href: '/admin/users', icon: 'fas fa-users', label: 'User Management' },
       { href: '/admin/contact-messages', icon: 'fas fa-envelope-open-text', label: 'Inquiry Inbox' },
       { href: '/admin/admissions', icon: 'fas fa-user-graduate', label: 'Admissions' },
+      { href: '/admin/faculty', icon: 'fas fa-chalkboard-teacher', label: 'Faculty' },
     ]
   },
   {

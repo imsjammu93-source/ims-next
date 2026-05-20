@@ -75,6 +75,11 @@ export const getBlogCategories = (all = 0) => fetchInternal(`/blogs/categories/g
 export const getEvents = (all = 0) => fetchInternal(`/events/get.php?all=${all}`);
 export const getEventBySlug = (slug) => fetchInternal(`/events/get.php?slug=${slug}`).then(data => data && data.length > 0 ? data[0] : null);
 
+export const getFaculty = (all = 0, dept = '') => fetchInternal(`/faculty/get.php?all=${all}${dept ? '&department='+dept : ''}`);
+export const addFaculty = (data) => postInternal('/faculty/add.php', data);
+export const updateFaculty = (data) => postInternal('/faculty/update.php', data);
+export const deleteFaculty = (id, type = 'soft') => postInternal('/faculty/delete.php', { id, type });
+
 export const addBlog = (data) => postInternal('/blogs/add.php', data);
 export const updateBlog = (data) => postInternal('/blogs/update.php', data);
 export const deleteBlog = (id, type = 'soft') => postInternal('/blogs/delete.php', { id, type });

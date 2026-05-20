@@ -82,7 +82,7 @@ function Footer() {
               <a href="/faculty-ims">Faculty Members</a>
             </li>
             <li>
-              <a href="/admissions">Admissions 2025</a>
+              <a href="/admissions">Admissions 2026</a>
             </li>
             <li>
               <a href="/why-ims">The IMS Advantage</a>
@@ -108,7 +108,7 @@ function Footer() {
               <a href="/our-leading-recruiters">Our Recruiters</a>
             </li>
             <li>
-              <a href="/admissions">Admissions 2025</a>
+              <a href="/admissions">Admissions 2026</a>
             </li>
           </ul>
         </div>
@@ -134,9 +134,17 @@ function Footer() {
     <div className="container">
       <div className="footer-bottom__inner">
         <p className="footer-copy">
-          © 2025 <a href="#">Institute of Management Sciences (IMS) Jammu</a>.
-          All rights reserved. Crafted with ❤️ for excellence in management
-          education. JGEI, Jammu.
+          © 2026 <a href="#">Institute of Management Sciences (IMS) Jammu</a>.
+          All rights reserved. Designed &amp; Developed by{' '}
+          <a
+            href="https://www.ghatiwebsolutions.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'var(--clr-gold)', fontWeight: '600' }}
+          >
+            Ghati Web Solutions
+          </a>
+          .
         </p>
         <div className="footer-socials">
           <a href={contactInfo.socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">

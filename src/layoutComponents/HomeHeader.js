@@ -5,6 +5,7 @@ import StatsSection from '@/components/StatsSection';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
+import { assetsInfo } from '@/config/assetsInfo';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -14,7 +15,7 @@ import 'swiper/css/effect-fade';
 
 const heroSlides = [
   {
-    bg: "/assets/images/ims-slider1.jpg",
+    bg: assetsInfo.slider1,
     badge: "Pioneer Private Institute — Est. 1997, Jammu",
     title: <>Shaping <span className="highlight">Future Leaders</span><br />Through Academic Excellence</>,
     desc: "Experience the grandeur of IMS Jammu, a premier institution dedicated to nurturing MBA, BBA & BCA professionals for over two decades.",
@@ -22,7 +23,7 @@ const heroSlides = [
     cta2: { text: "Explore Campus", link: "/why-ims", icon: "fa-play-circle" }
   },
   {
-    bg: "/assets/images/ims-slider2.jpg",
+    bg: assetsInfo.slider2,
     badge: "Advanced Learning Infrastructure",
     title: <>World-Class <span className="highlight">Modern Labs</span><br />Built for Technical Mastery</>,
     desc: "Empowering students with hands-on technical training in state-of-the-art computer centres and lecture halls designed for 21st-century learning.",
@@ -30,7 +31,7 @@ const heroSlides = [
     cta2: { text: "Research Facilities", link: "/why-ims", icon: "fa-microchip" }
   },
   {
-    bg: "/assets/images/ims-slider3.jpg",
+    bg:   assetsInfo.slider3,
     badge: "Distinguished Academic Mentorship",
     title: <>Guided by <span className="highlight">Expert Faculty</span><br />Committed to Your Success</>,
     desc: "Learn from the best. Our experienced faculty brings industry insights and academic rigor to help you navigate your professional journey.",
@@ -38,7 +39,7 @@ const heroSlides = [
     cta2: { text: "Academics", link: "/master-of-business-administration", icon: "fa-book-open" }
   },
   {
-    bg: "/assets/images/ims-slider4.jpg",
+    bg: assetsInfo.slider4,
     badge: "Vibrant Campus Life",
     title: <>Beyond <span className="highlight">Academics</span><br />Celebrate Every Milestone</>,
     desc: "From cultural concerts to academic seminars, life at IMS Jammu is a journey of holistic development and unforgettable memories.",
@@ -46,7 +47,7 @@ const heroSlides = [
     cta2: { text: "Gallery", link: "/gallery", icon: "fa-images" }
   },
    {
-    bg: "/assets/images/ims-slider5.jpg",
+    bg: assetsInfo.slider5,
     badge: "Social Responsibility & Ethics",
     title: <>Nurturing <span className="highlight">Values & Sustainability</span><br />For a Greener Tomorrow</>,
     desc: "We believe in building character. Our students actively engage in social welfare and environmental initiatives to become responsible global citizens.",
@@ -54,7 +55,7 @@ const heroSlides = [
     cta2: { text: "Our Vision", link: "/overview-ims", icon: "fa-eye" }
   },
    {
-    bg: "/assets/images/ims-slider6.jpg",
+    bg: assetsInfo.slider6,
     badge: "The IMS Jammu Family",
     title: <>Stronger <span className="highlight">Together</span><br />Defining Professional Excellence</>,
     desc: "Join a collaborative community where teachers and students work hand-in-hand to achieve prestigious placements and career success.",
