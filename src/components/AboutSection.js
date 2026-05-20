@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { assetsInfo } from '@/config/assetsInfo'
 function AboutSection() {
   return (
    <section
@@ -61,7 +61,7 @@ function AboutSection() {
       <div className="campus-visual" data-aos="fade-left">
         <div className="campus-img-wrap">
           <img
-            src="assets/images/ims-slider1.jpg"
+            src={assetsInfo.slider1}
             alt="IMS Jammu Campus — 25 Acres, Akhnoor Road"
             loading="lazy"
             className="campus-img"
