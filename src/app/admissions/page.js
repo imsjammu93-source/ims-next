@@ -80,7 +80,7 @@ export default function AdmissionsPage() {
       />
 
       <main className="admissions-page">
-        <section className="container" style={{padding: '100px 0'}}>
+        <section className="container admissions-main-section">
           <div className="admission-layout">
             
             {/* Left Column: Easy to Read Info */}
@@ -120,9 +120,9 @@ export default function AdmissionsPage() {
               </div>
 
               {/* Eligibility Section */}
-              <div style={{marginBottom: '60px', padding: '40px', background: '#f8f9fa', borderRadius: '15px'}}>
+              <div className="eligibility-container">
                 <h3 style={{marginBottom: '20px', color: 'var(--clr-navy)'}}>Who can Apply?</h3>
-                <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
+                <div className="eligibility-grid">
                   <div className="info-text">
                     <p><strong>For BBA/BCA:</strong></p>
                     <p>You must have passed 12th class from a recognized board with at least 45% marks.</p>

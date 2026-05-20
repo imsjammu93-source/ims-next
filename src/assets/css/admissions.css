@@ -175,9 +175,84 @@
   line-height: 1.5;
 }
 
+/* Responsive adjustments for Admissions Section and Layout */
+.admissions-main-section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.eligibility-container {
+  margin-bottom: 60px;
+  padding: 40px;
+  background: #f8f9fa;
+  border-radius: 15px;
+}
+
+.eligibility-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
 @media (max-width: 992px) {
+  .admissions-main-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .admission-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .admission-layout .sidebar {
+    grid-row: 1; /* Form goes to the top */
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .admission-layout .admission-content {
+    grid-row: 2; /* Information goes to the bottom */
+  }
+
   .admission-form-card {
-    margin-top: 50px;
+    margin-top: 0;
+    padding: 35px; /* Elegant slightly reduced padding on tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .admissions-main-section {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .eligibility-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .eligibility-container {
+    padding: 25px 20px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .admissions-main-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .admission-form-card {
+    padding: 24px 20px; /* Space-saving elegant padding for mobile screens */
+  }
+  
+  .admission-form-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
   }
 }
 
