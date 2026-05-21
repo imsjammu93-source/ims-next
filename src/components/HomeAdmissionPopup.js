@@ -15,6 +15,25 @@ export default function HomeAdmissionPopup() {
     course: '',
     message: ''
   });
+  const [captcha, setCaptcha] = useState({ num1: null, num2: null, signature: '', timestamp: null, answer: '' });
+
+  const fetchCaptcha = async () => {
+    try {
+      const res = await fetch('/api/admissions');
+      const data = await res.json();
+      if (data.success) {
+        setCaptcha({
+          num1: data.num1,
+          num2: data.num2,
+          signature: data.signature,
+          timestamp: data.timestamp,
+          answer: ''
+        });
+      }
+    } catch (err) {
+      console.error("Failed to load captcha challenge:", err);
+    }
+  };
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -32,6 +51,7 @@ export default function HomeAdmissionPopup() {
       }
     };
     fetchSettings();
+    fetchCaptcha();
   }, []);
 
   const handleChange = (e) => {
@@ -50,7 +70,14 @@ export default function HomeAdmissionPopup() {
       const res = await fetch("/api/admissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          num1: captcha.num1,
+          num2: captcha.num2,
+          signature: captcha.signature,
+          timestamp: captcha.timestamp,
+          captchaAnswer: captcha.answer
+        }),
       });
 
       const data = await res.json();
@@ -62,9 +89,11 @@ export default function HomeAdmissionPopup() {
         }, 3000);
         
         setFormData({ name: '', email: '', phone: '', course: '', message: '' });
+        fetchCaptcha(); // Load fresh equation immediately on success
       } else {
         setStatus('error');
-        alert("Something went wrong. Please try again.");
+        alert(data.message || "Incorrect verification answer or challenge expired.");
+        fetchCaptcha();
       }
     } catch (error) {
       console.error(error);
@@ -160,6 +189,34 @@ export default function HomeAdmissionPopup() {
                     value={formData.message}
                     onChange={handleChange}
                   ></textarea>
+                </div>
+
+                {/* Security Verification (Captcha) */}
+                <div className="form-group captcha-group">
+                  <label>Security Verification (required)</label>
+                  <div className="captcha-container">
+                    <span className="captcha-question">
+                      {captcha.num1 !== null ? `${captcha.num1} + ${captcha.num2} =` : 'Loading...'}
+                    </span>
+                    <input 
+                      type="number" 
+                      name="captcha"
+                      className="form-control captcha-input"
+                      placeholder="?"
+                      required
+                      value={captcha.answer}
+                      onChange={(e) => setCaptcha({ ...captcha, answer: e.target.value })}
+                    />
+                    <button 
+                      type="button" 
+                      className="captcha-refresh-btn" 
+                      onClick={fetchCaptcha}
+                      title="Refresh security challenge"
+                      aria-label="Refresh security challenge"
+                    >
+                      <i className="fas fa-sync-alt" />
+                    </button>
+                  </div>
                 </div>
 
                 <button 

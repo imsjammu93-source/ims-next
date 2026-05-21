@@ -1,9 +1,137 @@
 import nodemailer from "nodemailer";
+import crypto from "crypto";
+
+// Simple in-memory caches to prevent human duplicate spam and replay attacks
+const usedSignatures = new Map(); // signature -> timestamp
+const submissionCache = new Map(); // phone/email -> timestamp
+
+const COOLDOWN_DURATION = 5 * 60 * 1000; // 5 minutes duplicate submission cooldown
+const CAPTCHA_EXPIRATION = 10 * 60 * 1000; // 10 minutes captcha validation window
+
+function cleanupCaches() {
+  const now = Date.now();
+  
+  // Clean up used signatures older than 10 minutes
+  for (const [sig, ts] of usedSignatures.entries()) {
+    if (now - ts > CAPTCHA_EXPIRATION) {
+      usedSignatures.delete(sig);
+    }
+  }
+
+  // Clean up duplicate submission cooldowns older than 5 minutes
+  for (const [key, ts] of submissionCache.entries()) {
+    if (now - ts > COOLDOWN_DURATION) {
+      submissionCache.delete(key);
+    }
+  }
+}
+
+export async function GET(req) {
+  try {
+    cleanupCaches();
+
+    const num1 = Math.floor(Math.random() * 9) + 1; // 1 to 9
+    const num2 = Math.floor(Math.random() * 9) + 1; // 1 to 9
+    const timestamp = Date.now();
+    const secret = process.env.JWT_SECRET || "ims-captcha-secret-key-2024";
+
+    const signature = crypto
+      .createHmac("sha256", secret)
+      .update(`${num1}+${num2}+${timestamp}`)
+      .digest("hex");
+
+    return Response.json({
+      success: true,
+      num1,
+      num2,
+      timestamp,
+      signature
+    });
+  } catch (error) {
+    console.error("Error generating captcha:", error);
+    return Response.json(
+      { success: false, message: "Failed to generate security verification" },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(req) {
   try {
+    cleanupCaches();
+
     const body = await req.json();
-    const { name, email, phone, course, message } = body;
+    const { name, email, phone, course, message, num1, num2, timestamp, signature, captchaAnswer } = body;
+
+    // 1. Captcha validation
+    if (!signature || captchaAnswer === undefined || num1 === undefined || num2 === undefined || !timestamp) {
+      return Response.json(
+        { success: false, message: "Security validation is missing. Please solve the captcha." },
+        { status: 400 }
+      );
+    }
+
+    // 2. Prevent Replay Attack
+    if (usedSignatures.has(signature)) {
+      return Response.json(
+        { success: false, message: "This security challenge has already been solved. Please load a fresh captcha." },
+        { status: 400 }
+      );
+    }
+
+    // 3. Verify Challenge Age (10 minutes max)
+    const now = Date.now();
+    const challengeTime = parseInt(timestamp, 10);
+    if (isNaN(challengeTime) || now - challengeTime > CAPTCHA_EXPIRATION) {
+      return Response.json(
+        { success: false, message: "Security challenge expired. Please click refresh next to the captcha." },
+        { status: 400 }
+      );
+    }
+
+    const secret = process.env.JWT_SECRET || "ims-captcha-secret-key-2024";
+    const expectedSignature = crypto
+      .createHmac("sha256", secret)
+      .update(`${num1}+${num2}+${timestamp}`)
+      .digest("hex");
+
+    if (signature !== expectedSignature) {
+      return Response.json(
+        { success: false, message: "Security challenge signature is invalid. Please refresh the captcha." },
+        { status: 400 }
+      );
+    }
+
+    if (parseInt(captchaAnswer, 10) !== parseInt(num1, 10) + parseInt(num2, 10)) {
+      return Response.json(
+        { success: false, message: "Incorrect math answer. Please try again." },
+        { status: 400 }
+      );
+    }
+
+    // 4. Submission Cooldown / Cooldown Rate Limiting (by Phone & Email)
+    const normPhone = phone ? phone.trim() : null;
+    const normEmail = email ? email.trim().toLowerCase() : null;
+
+    if (normPhone && submissionCache.has(normPhone)) {
+      const lastSub = submissionCache.get(normPhone);
+      if (now - lastSub < COOLDOWN_DURATION) {
+        return Response.json(
+          { success: false, message: "An enquiry with this phone number was recently submitted. Please wait a few minutes." },
+          { status: 429 }
+        );
+      }
+    }
+
+    if (normEmail && submissionCache.has(normEmail)) {
+      const lastSub = submissionCache.get(normEmail);
+      if (now - lastSub < COOLDOWN_DURATION) {
+        return Response.json(
+          { success: false, message: "An enquiry with this email address was recently submitted. Please wait a few minutes." },
+          { status: 429 }
+        );
+      }
+    }
 
     // 1. Save to Database via PHP API
     let apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/admissions/add.php`;
@@ -71,6 +199,13 @@ export async function POST(req) {
         </div>
       `,
     });
+
+    // Mark signature as solved to prevent replay
+    usedSignatures.set(signature, challengeTime);
+
+    // Register phone/email cooldowns
+    if (normPhone) submissionCache.set(normPhone, now);
+    if (normEmail) submissionCache.set(normEmail, now);
 
     return Response.json({
       success: true,

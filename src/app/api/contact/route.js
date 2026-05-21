@@ -1,11 +1,139 @@
 import nodemailer from "nodemailer";
+import crypto from "crypto";
+
+// Separate in-memory caches to prevent human duplicate spam and replay attacks for Contact inquiries
+const usedContactSignatures = new Map(); // signature -> timestamp
+const contactSubmissionCache = new Map(); // phone/email -> timestamp
+
+const COOLDOWN_DURATION = 5 * 60 * 1000; // 5 minutes duplicate submission cooldown
+const CAPTCHA_EXPIRATION = 10 * 60 * 1000; // 10 minutes captcha validation window
+
+function cleanupCaches() {
+  const now = Date.now();
+  
+  // Clean up used signatures older than 10 minutes
+  for (const [sig, ts] of usedContactSignatures.entries()) {
+    if (now - ts > CAPTCHA_EXPIRATION) {
+      usedContactSignatures.delete(sig);
+    }
+  }
+
+  // Clean up duplicate submission cooldowns older than 5 minutes
+  for (const [key, ts] of contactSubmissionCache.entries()) {
+    if (now - ts > COOLDOWN_DURATION) {
+      contactSubmissionCache.delete(key);
+    }
+  }
+}
+
+export async function GET(req) {
+  try {
+    cleanupCaches();
+
+    const num1 = Math.floor(Math.random() * 9) + 1; // 1 to 9
+    const num2 = Math.floor(Math.random() * 9) + 1; // 1 to 9
+    const timestamp = Date.now();
+    const secret = process.env.JWT_SECRET || "ims-captcha-secret-key-2024";
+
+    const signature = crypto
+      .createHmac("sha256", secret)
+      .update(`${num1}+${num2}+${timestamp}`)
+      .digest("hex");
+
+    return Response.json({
+      success: true,
+      num1,
+      num2,
+      timestamp,
+      signature
+    });
+  } catch (error) {
+    console.error("Error generating contact captcha:", error);
+    return Response.json(
+      { success: false, message: "Failed to generate security verification" },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(req) {
   try {
-    const formData = await req.json();
-    const { name, email, phone, subject, message } = formData;
+    cleanupCaches();
 
-    // 1. Save to Database via PHP API
+    const body = await req.json();
+    const { name, email, phone, subject, message, num1, num2, timestamp, signature, captchaAnswer } = body;
+
+    // 1. Captcha validation
+    if (!signature || captchaAnswer === undefined || num1 === undefined || num2 === undefined || !timestamp) {
+      return Response.json(
+        { success: false, message: "Security validation is missing. Please solve the captcha." },
+        { status: 400 }
+      );
+    }
+
+    // 2. Prevent Replay Attack
+    if (usedContactSignatures.has(signature)) {
+      return Response.json(
+        { success: false, message: "This security challenge has already been solved. Please load a fresh captcha." },
+        { status: 400 }
+      );
+    }
+
+    // 3. Verify Challenge Age (10 minutes max)
+    const now = Date.now();
+    const challengeTime = parseInt(timestamp, 10);
+    if (isNaN(challengeTime) || now - challengeTime > CAPTCHA_EXPIRATION) {
+      return Response.json(
+        { success: false, message: "Security challenge expired. Please click refresh next to the captcha." },
+        { status: 400 }
+      );
+    }
+
+    const secret = process.env.JWT_SECRET || "ims-captcha-secret-key-2024";
+    const expectedSignature = crypto
+      .createHmac("sha256", secret)
+      .update(`${num1}+${num2}+${timestamp}`)
+      .digest("hex");
+
+    if (signature !== expectedSignature) {
+      return Response.json(
+        { success: false, message: "Security challenge signature is invalid. Please refresh the captcha." },
+        { status: 400 }
+      );
+    }
+
+    if (parseInt(captchaAnswer, 10) !== parseInt(num1, 10) + parseInt(num2, 10)) {
+      return Response.json(
+        { success: false, message: "Incorrect math answer. Please try again." },
+        { status: 400 }
+      );
+    }
+
+    // 4. Submission Cooldown / Cooldown Rate Limiting (by Phone & Email)
+    const normPhone = phone ? phone.trim() : null;
+    const normEmail = email ? email.trim().toLowerCase() : null;
+
+    if (normPhone && contactSubmissionCache.has(normPhone)) {
+      const lastSub = contactSubmissionCache.get(normPhone);
+      if (now - lastSub < COOLDOWN_DURATION) {
+        return Response.json(
+          { success: false, message: "An inquiry with this phone number was recently submitted. Please wait a few minutes." },
+          { status: 429 }
+        );
+      }
+    }
+
+    if (normEmail && contactSubmissionCache.has(normEmail)) {
+      const lastSub = contactSubmissionCache.get(normEmail);
+      if (now - lastSub < COOLDOWN_DURATION) {
+        return Response.json(
+          { success: false, message: "An inquiry with this email address was recently submitted. Please wait a few minutes." },
+          { status: 429 }
+        );
+      }
+    }
+
+    // 5. Save to Database via PHP API
     try {
         let apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/contact_messages/add.php`;
         // Ensure IPv4 resolution for local Node.js server-side fetch
@@ -13,10 +141,12 @@ export async function POST(req) {
         
         console.log("Targeting PHP API at:", apiUrl);
         
+        // Pass original formData fields to the DB PHP API
+        const dbPayload = { name, email, phone, subject, message };
         const dbRes = await fetch(apiUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(dbPayload)
         });
         const dbData = await dbRes.json();
         console.log("PHP API Response:", dbData);
@@ -27,7 +157,7 @@ export async function POST(req) {
         console.error("DB Connection Error:", dbErr.message);
     }
 
-    // 2. Send Email Notification
+    // 6. Send Email Notification
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -49,7 +179,7 @@ export async function POST(req) {
           <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
           <div style="background: #f8fafc; padding: 15px; border-radius: 8px; margin-top: 15px;">
             <strong>Message:</strong><br/>
-            ${message.replace(/\n/g, '<br/>')}
+            ${message ? message.replace(/\n/g, '<br/>') : ''}
           </div>
           <p style="font-size: 0.8rem; color: #64748b; margin-top: 20px;">This message was sent from the IMS Jammu official contact form.</p>
         </div>
@@ -57,6 +187,11 @@ export async function POST(req) {
     };
 
     await transporter.sendMail(mailOptions);
+
+    // 7. Success state caching
+    usedContactSignatures.set(signature, challengeTime);
+    if (normPhone) contactSubmissionCache.set(normPhone, now);
+    if (normEmail) contactSubmissionCache.set(normEmail, now);
 
     return Response.json({
       success: true,
@@ -74,3 +209,4 @@ export async function POST(req) {
     );
   }
 }
+

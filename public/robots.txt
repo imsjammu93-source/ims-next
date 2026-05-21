@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+
+# Host
+Host: https://imsjammu.com
+
+# Sitemaps
+Sitemap: https://imsjammu.com/sitemap.xml

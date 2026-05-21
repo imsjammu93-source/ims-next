@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '@/layoutComponents/Layout';
 import PageHeader from '@/layoutComponents/PageHeader';
 import { contactInfo } from '@/config/contactInfo';
@@ -14,6 +14,30 @@ function ContactPage() {
     message: ''
   });
   const [status, setStatus] = useState('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [captcha, setCaptcha] = useState({ num1: null, num2: null, signature: '', timestamp: null, answer: '' });
+
+  const fetchCaptcha = async () => {
+    try {
+      const res = await fetch('/api/contact');
+      const data = await res.json();
+      if (data.success) {
+        setCaptcha({
+          num1: data.num1,
+          num2: data.num2,
+          signature: data.signature,
+          timestamp: data.timestamp,
+          answer: ''
+        });
+      }
+    } catch (err) {
+      console.error("Failed to load captcha challenge:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchCaptcha();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,24 +47,40 @@ function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
+    setErrorMessage('');
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          num1: captcha.num1,
+          num2: captcha.num2,
+          signature: captcha.signature,
+          timestamp: captcha.timestamp,
+          captchaAnswer: captcha.answer
+        }),
       });
 
       const data = await res.json();
       if (data.success) {
         setStatus('success');
         setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        fetchCaptcha(); // Instantly fetch new captcha challenge for any future requests
       } else {
         setStatus('error');
+        const errMsg = data.message || "Incorrect verification answer or challenge expired.";
+        setErrorMessage(errMsg);
+        alert(errMsg);
+        fetchCaptcha();
       }
     } catch (err) {
       console.error(err);
       setStatus('error');
+      const connMsg = "Submission failed. Please check your connection and try again.";
+      setErrorMessage(connMsg);
+      alert("Failed to submit. Please check your connection.");
     }
   };
 
@@ -157,6 +197,34 @@ function ContactPage() {
                   ></textarea>
                 </div>
 
+                {/* Security Verification (Captcha) */}
+                <div className="form-group captcha-group">
+                  <label className="form-label">Security Verification (required)</label>
+                  <div className="captcha-container">
+                    <span className="captcha-question">
+                      {captcha.num1 !== null ? `${captcha.num1} + ${captcha.num2} =` : 'Loading...'}
+                    </span>
+                    <input 
+                      type="number" 
+                      name="captcha"
+                      className="form-input captcha-input"
+                      placeholder="?"
+                      required
+                      value={captcha.answer}
+                      onChange={(e) => setCaptcha({ ...captcha, answer: e.target.value })}
+                    />
+                    <button 
+                      type="button" 
+                      className="captcha-refresh-btn" 
+                      onClick={fetchCaptcha}
+                      title="Refresh security challenge"
+                      aria-label="Refresh security challenge"
+                    >
+                      <i className="fas fa-sync-alt" />
+                    </button>
+                  </div>
+                </div>
+
                 <button 
                   type="submit" 
                   disabled={status === 'loading'}
@@ -179,7 +247,7 @@ function ContactPage() {
                 {status === 'error' && (
                   <div className="status-toast error">
                     <i className="fas fa-exclamation-triangle" style={{fontSize: '1.5rem'}} />
-                    <span>Submission failed. Please check your connection and try again.</span>
+                    <span>{errorMessage || "Submission failed. Please check your connection and try again."}</span>
                   </div>
                 )}
               </form>
