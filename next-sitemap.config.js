@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://imsjammu.com',
+  siteUrl: process.env.SITE_URL || 'https://imsjammu.in',
   generateRobotsTxt: true,
   sitemapSize: 7000,
   exclude: ['/admin', '/admin/*', '/api', '/api/*'],

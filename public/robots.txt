@@ -5,7 +5,7 @@ Disallow: /admin
 Disallow: /api
 
 # Host
-Host: https://imsjammu.com
+Host: https://imsjammu.in
 
 # Sitemaps
-Sitemap: https://imsjammu.com/sitemap.xml
+Sitemap: https://imsjammu.in/sitemap.xml
