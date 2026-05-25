@@ -38,7 +38,7 @@ function EventsSection() {
             const month = eventDate.toLocaleString('en-US', { month: 'short' });
 
             return (
-              <Link key={index} href={`/news-events/${event.slug}`} className="event-card" data-aos="fade-up" data-aos-delay={index * 100}>
+              <Link prefetch={false} key={index} href={`/news-events/${event.slug}`} className="event-card" data-aos="fade-up" data-aos-delay={index * 100}>
                 <div className="event-thumb">
                   <img 
                     src={event.full_image_path || '/assets/images/placeholder.jpg'} 
@@ -66,7 +66,7 @@ function EventsSection() {
         </div>
 
         <div className="text-center" style={{ marginTop: '60px' }}>
-          <Link href="/news-events" className="btn btn-primary">
+          <Link prefetch={false} href="/news-events" className="btn btn-primary">
             Explore All Events <i className="fas fa-calendar-alt" style={{ marginLeft: '10px' }} />
           </Link>
         </div>

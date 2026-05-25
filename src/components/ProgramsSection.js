@@ -53,6 +53,7 @@ function ProgramsSection() {
         <div className="wings-grid">
           {programs.map((prog, idx) => (
             <Link 
+              prefetch={false}
               key={idx} 
               href={prog.link} 
               className="wing-card" 

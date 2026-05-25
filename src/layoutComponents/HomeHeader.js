@@ -95,10 +95,10 @@ function HomeHeader() {
                 <h1 className="hero-title">{slide.title}</h1>
                 <p className="hero-desc">{slide.desc}</p>
                 <div className="hero-cta">
-                  <Link href={slide.cta1.link} className="btn btn-primary">
+                  <Link prefetch={false} href={slide.cta1.link} className="btn btn-primary">
                     <i className={`fas ${slide.cta1.icon}`} /> {slide.cta1.text}
                   </Link>
-                  <Link href={slide.cta2.link} className="btn btn-outline">
+                  <Link prefetch={false} href={slide.cta2.link} className="btn btn-outline">
                     <i className={`fas ${slide.cta2.icon}`} /> {slide.cta2.text}
                   </Link>
                 </div>

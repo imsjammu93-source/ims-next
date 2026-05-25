@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { contactInfo } from '@/config/contactInfo'
+import Link from 'next/link';
 
 function Footer() {
   const [isVisible, setIsVisible] = useState(false);
@@ -64,28 +65,28 @@ function Footer() {
           <div className="footer-title">Quick Links</div>
           <ul className="footer-links">
             <li>
-              <a href="/">Home</a>
+              <Link prefetch={false} href="/">Home</Link>
             </li>
             <li>
-              <a href="/overview-ims">About IMS</a>
+              <Link prefetch={false} href="/overview-ims">About IMS</Link>
             </li>
             <li>
-              <a href="/master-of-business-administration">MBA Programme</a>
+              <Link prefetch={false} href="/master-of-business-administration">MBA Programme</Link>
             </li>
             <li>
-              <a href="/bachelor-of-business-administration">BBA Programme</a>
+              <Link prefetch={false} href="/bachelor-of-business-administration">BBA Programme</Link>
             </li>
             <li>
-              <a href="/bachelor-of-computer-application">BCA Programme</a>
+              <Link prefetch={false} href="/bachelor-of-computer-application">BCA Programme</Link>
             </li>
             <li>
-              <a href="/faculty-ims">Faculty Members</a>
+              <Link prefetch={false} href="/faculty-ims">Faculty Members</Link>
             </li>
             <li>
-              <a href="/admissions">Admissions 2026</a>
+              <Link prefetch={false} href="/admissions">Admissions 2026</Link>
             </li>
             <li>
-              <a href="/why-ims">The IMS Advantage</a>
+              <Link prefetch={false} href="/why-ims">The IMS Advantage</Link>
             </li>
           </ul>
         </div>
@@ -93,22 +94,22 @@ function Footer() {
           <div className="footer-title">Student Life</div>
           <ul className="footer-links">
             <li>
-              <a href="/campus-life-ims">Campus Life</a>
+              <Link prefetch={false} href="/campus-life-ims">Campus Life</Link>
             </li>
             <li>
-              <a href="/faculty-ims">Our Faculty</a>
+              <Link prefetch={false} href="/faculty-ims">Our Faculty</Link>
             </li>
             <li>
-              <a href="/conference">Conferences</a>
+              <Link prefetch={false} href="/conference">Conferences</Link>
             </li>
             <li>
-              <a href="/alumni-ims">Alumni Network</a>
+              <Link prefetch={false} href="/alumni-ims">Alumni Network</Link>
             </li>
             <li>
-              <a href="/our-leading-recruiters">Our Recruiters</a>
+              <Link prefetch={false} href="/our-leading-recruiters">Our Recruiters</Link>
             </li>
             <li>
-              <a href="/admissions">Admissions 2026</a>
+              <Link prefetch={false} href="/admissions">Admissions 2026</Link>
             </li>
           </ul>
         </div>

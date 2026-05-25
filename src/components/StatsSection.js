@@ -34,7 +34,7 @@ function StatsSection() {
     <div className="hero-stats full-width">
         <div className="academic-ribbon" data-aos="fade-up">
           {ribbonItems.map((item, index) => (
-            <Link href={item.link} className="ribbon-item" key={index}>
+            <Link prefetch={false} href={item.link} className="ribbon-item" key={index}>
               <div className="ribbon-icon">
                 <i className={`fas ${item.icon}`} />
               </div>

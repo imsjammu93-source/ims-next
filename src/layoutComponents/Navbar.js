@@ -67,7 +67,7 @@ export default function Navbar() {
             <i className="fab fa-linkedin-in" />
           </a>
         </div>
-        {/* <Link href="/career" className="btn-portal" id="student-portal-btn">
+        {/* <Link prefetch={false} href="/career" className="btn-portal" id="student-portal-btn">
           <i className="fas fa-user-graduate" /> Career
         </Link> */}
       </div>
@@ -78,7 +78,7 @@ export default function Navbar() {
   <div className="container">
     <div className="navbar__inner">
       {/* Logo */}
-      <Link href="/" className="navbar__logo" aria-label="IMS Jammu Home">
+      <Link prefetch={false} href="/" className="navbar__logo" aria-label="IMS Jammu Home">
         <div className="logo-emblem">
           <img src="/assets/images/Logo-IMS.png" alt="IMS Jammu" />
         </div>
@@ -86,7 +86,7 @@ export default function Navbar() {
       {/* Desktop Nav */}
       <ul className="navbar__nav" role="list">
         <li className="nav-item">
-          <Link href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
+          <Link prefetch={false} href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>
             Home
           </Link>
         </li>
@@ -108,7 +108,7 @@ export default function Navbar() {
                   <p>
                     Established in 1997, Institute of Management Sciences (IMS) Jammu is a pioneer private institute dedicated to shaping future leaders through academic excellence and industry-focused education.
                   </p>
-                  <Link href="/about-ims" className="btn btn-primary btn-sm" style={{ padding: '8px 20px', fontSize: '0.75rem' }}>
+                  <Link prefetch={false} href="/about-ims" className="btn btn-primary btn-sm" style={{ padding: '8px 20px', fontSize: '0.75rem' }}>
                     Read More <i className="fas fa-arrow-right" />
                   </Link>
                 </div>
@@ -119,7 +119,7 @@ export default function Navbar() {
             <div className="mega-col">
               <div className="mega-col__title">Leadership</div>
               
-              <Link href="/chairman-msg.ims" className="mega-item">
+              <Link prefetch={false} href="/chairman-msg.ims" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-user-tie" />
                 </div>
@@ -129,7 +129,7 @@ export default function Navbar() {
                 </div>
               </Link>
 
-              <Link href="/director-msg.ims" className="mega-item">
+              <Link prefetch={false} href="/director-msg.ims" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-chalkboard-teacher" />
                 </div>
@@ -138,7 +138,7 @@ export default function Navbar() {
                   <p>Message from Dr. Meenakshi Sharma</p>
                 </div>
               </Link>
-                <Link href="/overview-ims" className="mega-item">
+                <Link prefetch={false} href="/overview-ims" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-trophy" />
                 </div>
@@ -153,7 +153,7 @@ export default function Navbar() {
             <div className="mega-col">
               <div className="mega-col__title">Organization</div>
 
-              <Link href="/vision-ims" className="mega-item">
+              <Link prefetch={false} href="/vision-ims" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-bullseye" />
                 </div>
@@ -163,7 +163,7 @@ export default function Navbar() {
                 </div>
               </Link>
 
-              <Link href="/why-ims" className="mega-item" style={{background: 'var(--clr-gold-pale)', borderRadius: 'var(--radius-sm)'}}>
+              <Link prefetch={false} href="/why-ims" className="mega-item" style={{background: 'var(--clr-gold-pale)', borderRadius: 'var(--radius-sm)'}}>
                 <div className="mega-item__icon" style={{background: 'var(--clr-gold)', color: 'var(--clr-white)'}}>
                   <i className="fas fa-star" />
                 </div>
@@ -173,7 +173,7 @@ export default function Navbar() {
                 </div>
               </Link>
 
-              {/* <Link href="/history" className="mega-item">
+              {/* <Link prefetch={false} href="/history" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-history" />
                 </div>
@@ -183,7 +183,7 @@ export default function Navbar() {
                 </div>
               </Link> */}
 
-              <Link href="/administration-ims" className="mega-item">
+              <Link prefetch={false} href="/administration-ims" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-sitemap" />
                 </div>
@@ -206,7 +206,7 @@ export default function Navbar() {
               <div className="mega-col__title">Programs Offered</div>
              
 
-              <Link href="/bachelor-of-computer-application" className="mega-item">
+              <Link prefetch={false} href="/bachelor-of-computer-application" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-laptop-code" />
                 </div>
@@ -216,7 +216,7 @@ export default function Navbar() {
                 </div>
               </Link> 
               
-               <Link href="/bachelor-of-business-administration" className="mega-item">
+               <Link prefetch={false} href="/bachelor-of-business-administration" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-graduation-cap" />
                 </div>
@@ -229,7 +229,7 @@ export default function Navbar() {
 
 
 
-               <Link href="/master-of-business-administration" className="mega-item">
+               <Link prefetch={false} href="/master-of-business-administration" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-briefcase" />
                 </div>
@@ -241,10 +241,10 @@ export default function Navbar() {
             </div>
             {/* Col 2: BBA */}
             <div className="mega-col">
-              <Link href="/why-ims" className="mega-col__title" style={{display: 'block', borderBottom: '2px solid var(--clr-gold-pale)', paddingBottom: '10px', marginBottom: '10px'}}>
+              <Link prefetch={false} href="/why-ims" className="mega-col__title" style={{display: 'block', borderBottom: '2px solid var(--clr-gold-pale)', paddingBottom: '10px', marginBottom: '10px'}}>
                 Why IMS <i className="fas fa-external-link-alt" style={{fontSize: '0.6rem', marginLeft: '5px'}} />
               </Link>
-              <Link href="/training-placement-cell-message" className="mega-item">
+              <Link prefetch={false} href="/training-placement-cell-message" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-chart-line" />
                 </div>
@@ -253,7 +253,7 @@ export default function Navbar() {
                   <p>Career training & placement support</p>
                 </div>
               </Link>
-              <Link href="/our-leading-recruiters" className="mega-item">
+              <Link prefetch={false} href="/our-leading-recruiters" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-handshake" />
                 </div>
@@ -262,7 +262,7 @@ export default function Navbar() {
                   <p>Top companies hire our students</p>
                 </div>
               </Link>
-                   <Link href="/alumni-ims" className="mega-item">
+                   <Link prefetch={false} href="/alumni-ims" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-network-wired" />
                 </div>
@@ -272,7 +272,7 @@ export default function Navbar() {
                 </div>
               </Link>
               <div style={{marginTop: '15px', padding: '10px'}}>
-                <Link href="/why-ims" className="btn btn-primary btn-sm" style={{width: '100%', fontSize: '0.7rem', padding: '10px'}}>
+                <Link prefetch={false} href="/why-ims" className="btn btn-primary btn-sm" style={{width: '100%', fontSize: '0.7rem', padding: '10px'}}>
                   <i className="fas fa-star" /> Discover the IMS Edge
                 </Link>
               </div>
@@ -280,7 +280,7 @@ export default function Navbar() {
             {/* Col 3: BCA */}
             <div className="mega-col">
               <div className="mega-col__title">More</div>
-              <Link href="/conference" className="mega-item">
+              <Link prefetch={false} href="/conference" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-calendar" />
                 </div>
@@ -289,7 +289,7 @@ export default function Navbar() {
                   <p>Our Conferences and events</p>
                 </div>
               </Link>
-              <Link href="/faculty-ims" className="mega-item">
+              <Link prefetch={false} href="/faculty-ims" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-chalkboard-teacher" />
                 </div>
@@ -298,7 +298,7 @@ export default function Navbar() {
                   <p>Faculty to handle various activities</p>
                 </div>
               </Link>
-                <Link href="/ims-in-news" className="mega-item">
+                <Link prefetch={false} href="/ims-in-news" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-newspaper" />
                 </div>
@@ -307,7 +307,7 @@ export default function Navbar() {
                   <p>News and updates about IMS</p>
                 </div>
               </Link>
-              {/* <Link href="/facilities" className="mega-item">
+              {/* <Link prefetch={false} href="/facilities" className="mega-item">
                 <div className="mega-item__icon">
                   <i className="fas fa-book-open" />
                 </div>
@@ -322,16 +322,16 @@ export default function Navbar() {
               <div className="mega-col__title">Quick Links</div>
               <ul>
                  <li>
-                  <Link href="/admissions">Admissions</Link>
+                  <Link prefetch={false} href="/admissions">Admissions</Link>
                 </li>
                 <li>
-                  <Link href="/coming-soon">Downloads</Link>
+                  <Link prefetch={false} href="/coming-soon">Downloads</Link>
                 </li>
                 <li>
-                  <Link href="/coming-soon">Notices</Link>
+                  <Link prefetch={false} href="/coming-soon">Notices</Link>
                 </li>
                 <li>
-                  <Link href="/coming-soon">Question Papers</Link>
+                  <Link prefetch={false} href="/coming-soon">Question Papers</Link>
                 </li>
                 {/* <li>
                   <a href="#">Exam Timetable</a>
@@ -373,27 +373,27 @@ export default function Navbar() {
           </div>
         </li> */}
         <li className="nav-item">
-          <Link href="/blogs" className={`nav-link ${pathname === '/blogs' ? 'active' : ''}`}>
+          <Link prefetch={false} href="/blogs" className={`nav-link ${pathname === '/blogs' ? 'active' : ''}`}>
             Blogs
           </Link>
         </li>
         <li className="nav-item">
-          <Link href="/campus-life-ims" className={`nav-link ${pathname === '/gallery' ? 'active' : ''}`}>
+          <Link prefetch={false} href="/campus-life-ims" className={`nav-link ${pathname === '/gallery' ? 'active' : ''}`}>
             Campus Life
           </Link>
         </li>
         <li className="nav-item">
-          <Link href="/news-events" className={`nav-link ${pathname === '/news-events' ? 'active' : ''}`}>
+          <Link prefetch={false} href="/news-events" className={`nav-link ${pathname === '/news-events' ? 'active' : ''}`}>
             News &amp; Events
           </Link>
         </li>
         <li className="nav-item">
-          <Link href="/admissions" className={`nav-link ${pathname === '/admissions' ? 'active' : ''}`}>
+          <Link prefetch={false} href="/admissions" className={`nav-link ${pathname === '/admissions' ? 'active' : ''}`}>
             Admissions
           </Link>
         </li>
         <li className="nav-item">
-          <Link href="/contact" className={`nav-link ${pathname === '/contact' ? 'active' : ''}`}>
+          <Link prefetch={false} href="/contact" className={`nav-link ${pathname === '/contact' ? 'active' : ''}`}>
             Contact
           </Link>
         </li>
@@ -401,7 +401,7 @@ export default function Navbar() {
       {/* /navbar__nav */}
       {/* CTA */}
       <div className="navbar__actions">
-        <Link href="/admissions" className="btn btn-primary" id="apply-now-btn">
+        <Link prefetch={false} href="/admissions" className="btn btn-primary" id="apply-now-btn">
          Apply Now
         </Link>
       </div>
@@ -454,7 +454,7 @@ export default function Navbar() {
   </div>
   <nav className="sidebar-nav" role="navigation" style={{ paddingBottom: '40px' }}>
     {/* 1. Home */}
-    <Link href="/" onClick={closeSidebar}>
+    <Link prefetch={false} href="/" onClick={closeSidebar}>
       <i className="fas fa-home" /> Home
     </Link>
 
@@ -468,25 +468,25 @@ export default function Navbar() {
       <i className="fas fa-chevron-down" />
     </button>
     <div className={`sidebar-accordion-content ${activeAccordion === 'about' ? 'open' : ''}`}>
-      <Link href="/about-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/about-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
         About Institute
       </Link>
-      <Link href="/overview-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/overview-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
         Overview JGEI
       </Link>
-      <Link href="/chairman-msg.ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/chairman-msg.ims" className="sidebar-accordion-link" onClick={closeSidebar}>
         Chairman's Message
       </Link>
-      <Link href="/director-msg.ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/director-msg.ims" className="sidebar-accordion-link" onClick={closeSidebar}>
         Director's Message
       </Link>
-      <Link href="/vision-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/vision-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
         Vision &amp; Mission
       </Link>
-      <Link href="/why-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/why-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
         Why Choose IMS?
       </Link>
-      <Link href="/administration-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/administration-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
         Administration
       </Link>
     </div>
@@ -501,13 +501,13 @@ export default function Navbar() {
       <i className="fas fa-chevron-down" />
     </button>
     <div className={`sidebar-accordion-content ${activeAccordion === 'academics' ? 'open' : ''}`}>
-      <Link href="/bachelor-of-computer-application" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/bachelor-of-computer-application" className="sidebar-accordion-link" onClick={closeSidebar}>
         BCA (3-Year Degree)
       </Link>
-      <Link href="/bachelor-of-business-administration" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/bachelor-of-business-administration" className="sidebar-accordion-link" onClick={closeSidebar}>
         BBA (3-Year Degree)
       </Link>
-      <Link href="/master-of-business-administration" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/master-of-business-administration" className="sidebar-accordion-link" onClick={closeSidebar}>
         MBA (2-Year Degree)
       </Link>
     </div>
@@ -522,13 +522,13 @@ export default function Navbar() {
       <i className="fas fa-chevron-down" />
     </button>
     <div className={`sidebar-accordion-content ${activeAccordion === 'placements' ? 'open' : ''}`}>
-      <Link href="/training-placement-cell-message" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/training-placement-cell-message" className="sidebar-accordion-link" onClick={closeSidebar}>
         Training &amp; Placement Cell
       </Link>
-      <Link href="/our-leading-recruiters" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/our-leading-recruiters" className="sidebar-accordion-link" onClick={closeSidebar}>
         Leading Recruiters
       </Link>
-      <Link href="/alumni-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/alumni-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
         Alumni Network
       </Link>
     </div>
@@ -543,39 +543,39 @@ export default function Navbar() {
       <i className="fas fa-chevron-down" />
     </button>
     <div className={`sidebar-accordion-content ${activeAccordion === 'more' ? 'open' : ''}`}>
-      <Link href="/conference" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/conference" className="sidebar-accordion-link" onClick={closeSidebar}>
         Conferences &amp; Events
       </Link>
-      <Link href="/faculty-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/faculty-ims" className="sidebar-accordion-link" onClick={closeSidebar}>
         Faculty Directory
       </Link>
-      <Link href="/ims-in-news" className="sidebar-accordion-link" onClick={closeSidebar}>
+      <Link prefetch={false} href="/ims-in-news" className="sidebar-accordion-link" onClick={closeSidebar}>
         IMS in News
       </Link>
     </div>
 
     {/* 6. Blogs */}
-    <Link href="/blogs" onClick={closeSidebar}>
+    <Link prefetch={false} href="/blogs" onClick={closeSidebar}>
       <i className="fas fa-newspaper" /> Blogs
     </Link>
 
     {/* 7. Campus Life */}
-    <Link href="/campus-life-ims" onClick={closeSidebar}>
+    <Link prefetch={false} href="/campus-life-ims" onClick={closeSidebar}>
       <i className="fas fa-images" /> Campus Life
     </Link>
 
     {/* 8. News & Events */}
-    <Link href="/news-events" onClick={closeSidebar}>
+    <Link prefetch={false} href="/news-events" onClick={closeSidebar}>
       <i className="fas fa-calendar-alt" /> News &amp; Events
     </Link>
 
     {/* 9. Admissions */}
-    <Link href="/admissions" onClick={closeSidebar}>
+    <Link prefetch={false} href="/admissions" onClick={closeSidebar}>
       <i className="fas fa-user-graduate" /> Admissions
     </Link>
 
     {/* 10. Contact */}
-    <Link href="/contact" onClick={closeSidebar}>
+    <Link prefetch={false} href="/contact" onClick={closeSidebar}>
       <i className="fas fa-map-marker-alt" /> Contact Us
     </Link>
 

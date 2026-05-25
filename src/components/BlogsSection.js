@@ -63,7 +63,7 @@ function BlogsSection() {
               </h3>
               <div className="news-meta">
                 <span><i className="fas fa-calendar-alt" /> {new Date(featured.published_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
-                <Link href={`/blogs/${featured.slug}`} className="read-more-link">
+                <Link prefetch={false} href={`/blogs/${featured.slug}`} className="read-more-link">
                   Read Full Story <i className="fas fa-arrow-right" />
                 </Link>
               </div>
@@ -74,12 +74,12 @@ function BlogsSection() {
           <div className="news-scroll" data-aos="fade-left">
             <div className="news-scroll-header">
               <h4>Recent <span>Articles</span></h4>
-              <Link href="/blogs" className="view-all-link">Explore All</Link>
+              <Link prefetch={false} href="/blogs" className="view-all-link">Explore All</Link>
             </div>
             
             <div className="news-scroll-list">
               {sideList.map((blog, index) => (
-                <Link key={index} href={`/blogs/${blog.slug}`} className="news-scroll-item blog-item" style={{ textDecoration: 'none', display: 'block' }}>
+                <Link prefetch={false} key={index} href={`/blogs/${blog.slug}`} className="news-scroll-item blog-item" style={{ textDecoration: 'none', display: 'block' }}>
                   <div className="news-scroll-text">
                     <div className="news-scroll-text__tag">{blog.category_name}</div>
                     <h5 className="news-scroll-text__title">{blog.title}</h5>

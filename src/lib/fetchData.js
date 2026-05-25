@@ -11,7 +11,7 @@ const getUrl = (endpoint) => {
 /**
  * GET requests - Clean and simple
  */
-async function fetchInternal(endpoint) {
+async function fetchInternal(endpoint, useCache = false) {
   try {
     const url = getUrl(endpoint);
     const token = typeof window !== 'undefined' ? localStorage.getItem('adminToken') : null;
@@ -21,7 +21,14 @@ async function fetchInternal(endpoint) {
       headers['Authorization'] = `Bearer ${token}`;
     }
 
-    const res = await fetch(url, { headers, cache: 'no-store' });
+    const fetchOptions = { headers };
+    if (useCache) {
+      fetchOptions.next = { revalidate: 600 }; // 10 minutes cache
+    } else {
+      fetchOptions.cache = 'no-store';
+    }
+
+    const res = await fetch(url, fetchOptions);
     if (!res.ok) return [];
     const json = await res.json();
     return json.success ? json.data : [];
@@ -69,13 +76,13 @@ async function postInternal(endpoint, body, method = 'POST') {
 /* ==========================================
    MINIMAL EXPORTS
    ========================================== */
-export const getBlogs = (catId, all = 0, limit = null) => fetchInternal(`/blogs/get.php?all=${all}${catId ? '&category_id='+catId : ''}${limit ? '&limit='+limit : ''}`);
-export const getBlogBySlug = (slug) => fetchInternal(`/blogs/get.php?slug=${slug}`).then(data => data && data.length > 0 ? data[0] : null);
-export const getBlogCategories = (all = 0) => fetchInternal(`/blogs/categories/get.php?all=${all}`);
-export const getEvents = (all = 0) => fetchInternal(`/events/get.php?all=${all}`);
-export const getEventBySlug = (slug) => fetchInternal(`/events/get.php?slug=${slug}`).then(data => data && data.length > 0 ? data[0] : null);
+export const getBlogs = (catId, all = 0, limit = null) => fetchInternal(`/blogs/get.php?all=${all}${catId ? '&category_id='+catId : ''}${limit ? '&limit='+limit : ''}`, true);
+export const getBlogBySlug = (slug) => fetchInternal(`/blogs/get.php?slug=${slug}`, true).then(data => data && data.length > 0 ? data[0] : null);
+export const getBlogCategories = (all = 0) => fetchInternal(`/blogs/categories/get.php?all=${all}`, true);
+export const getEvents = (all = 0) => fetchInternal(`/events/get.php?all=${all}`, true);
+export const getEventBySlug = (slug) => fetchInternal(`/events/get.php?slug=${slug}`, true).then(data => data && data.length > 0 ? data[0] : null);
 
-export const getFaculty = (all = 0, dept = '') => fetchInternal(`/faculty/get.php?all=${all}${dept ? '&department='+dept : ''}`);
+export const getFaculty = (all = 0, dept = '') => fetchInternal(`/faculty/get.php?all=${all}${dept ? '&department='+dept : ''}`, true);
 export const addFaculty = (data) => postInternal('/faculty/add.php', data);
 export const updateFaculty = (data) => postInternal('/faculty/update.php', data);
 export const deleteFaculty = (id, type = 'soft') => postInternal('/faculty/delete.php', { id, type });
