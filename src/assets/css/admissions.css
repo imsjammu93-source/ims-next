@@ -266,14 +266,16 @@
   width: 100vw !important;
   height: 100vh !important;
   display: flex !important;
-  align-items: center !important;
+  align-items: flex-start !important; /* Top-align so overflow scroll works naturally from top */
   justify-content: center !important;
+  overflow-y: auto !important; /* Enable scrolling on the modal root backdrop globally */
+  padding: 40px 0 !important; /* Space at top/bottom of screen for breathing room */
   z-index: 999999 !important; /* Forces it above ALL headers/top bars */
   pointer-events: auto;
 }
 
 .admission-modal-overlay {
-  position: absolute !important;
+  position: fixed !important;
   inset: 0 !important;
   background: rgba(8, 29, 55, 0.8) !important; /* Navy tint */
   backdrop-filter: blur(8px) !important;
@@ -285,6 +287,8 @@
   position: relative !important;
   width: 90% !important;
   max-width: 550px !important; /* Increased width as requested */
+  margin-top: auto !important; /* Vertical centering helper for screen sizes with height > modal height */
+  margin-bottom: auto !important;
   z-index: 10 !important;
   animation: modalBounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -436,19 +440,51 @@
 }
 
 @media (max-width: 576px) {
+  .admission-modal-root {
+    align-items: flex-start !important; /* Top-align so overflow scroll works naturally from top */
+    overflow-y: auto !important; /* Enable scrolling on the modal root backdrop */
+    padding: 30px 0 !important; /* Space at top/bottom of screen */
+  }
+
+  .admission-modal-wrapper {
+    max-width: 92% !important;
+    margin-top: auto !important; /* Vertical centering helper for shorter screens */
+    margin-bottom: auto !important;
+  }
+
+  .modal-card-ui {
+    padding: 25px 20px 20px 20px !important; /* Save vertical space */
+  }
+
+  .modal-header-section {
+    margin-bottom: 15px; /* Save vertical space */
+  }
+
+  .modal-header-section h3 {
+    font-size: 1.35rem !important; /* Slightly smaller header */
+  }
+
+  .modal-form-layout textarea.form-control {
+    min-height: 70px; /* Compress description input a bit */
+  }
+
+  .captcha-group {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
   .modal-form-grid {
     grid-template-columns: 1fr;
     gap: 0;
   }
-  .admission-modal-wrapper {
-    max-width: 92% !important;
-  }
+
   .admission-modal-close {
     top: 10px;
     right: 10px;
     background: #f1f1f1;
     color: #333;
   }
+
   .admission-modal-close:hover {
     background: #e1e1e1;
     color: #000;
