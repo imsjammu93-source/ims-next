@@ -1,8 +1,24 @@
 'use client';
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Link from 'next/link';
+import { getAdmissionSettings } from '@/lib/fetchData';
 
 function StatsSection() {
+  const [settings, setSettings] = useState({ current_session: '2026-27' });
+  useEffect(() => {
+      const fetchSettings = async () => {
+        try {
+          const data = await getAdmissionSettings();
+          if (data && !Array.isArray(data)) {
+            setSettings(data);
+          }
+        } catch (err) {
+          console.error("Admissions page settings fetch failed:", err);
+        }
+      };
+      fetchSettings();
+     
+    }, []);
   const ribbonItems = [
     {
       title: "Experienced Faculty",
@@ -11,7 +27,7 @@ function StatsSection() {
       link: "/faculty-ims"
     },
     {
-      title: "Admissions 2025-26",
+      title: `Admissions ${settings.current_session}`,
       subtitle: "Secure Your Future Today",
       icon: "fa-user-edit",
       link: "/admissions"
